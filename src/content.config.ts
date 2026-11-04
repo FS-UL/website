@@ -7,6 +7,7 @@ const posts = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
+    author: z.string(),
     // Optional; the newsroom falls back to the first 25 words of the post.
     excerpt: z.string().optional(),
   }),

@@ -1,6 +1,7 @@
 ---
 title: "This post is to test the news category"
 date: 2026-09-26
+author: "Jude Myers"
 ---
 
 Hello world, this is a post in the news category for formula student UL

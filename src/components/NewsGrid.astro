@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-import { base, formatDate } from '../consts';
+import { base } from '../consts';
+import PostMeta from './PostMeta.astro';
 
 // Replaces the WordPress "News Posts" query block: newest first, 9 per page.
 const posts = (await getCollection('posts')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 9);
@@ -22,7 +23,7 @@ function excerpt(entry: (typeof posts)[number]) {
     {posts.map((post) => (
       <div class="wp-block-group has-accent-5-background-color has-background news-card is-layout-constrained">
         <div class="news-card__body">
-          <time class="has-accent-2-color has-text-color has-small-font-size" datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+          <PostMeta date={post.data.date} author={post.data.author} />
           <h3 class="wp-block-heading has-contrast-color has-text-color has-large-font-size"><a href={`${base}/${post.id}/`}>{post.data.title}</a></h3>
           <p class="has-contrast-color has-text-color has-small-font-size">{excerpt(post)}</p>
         </div>

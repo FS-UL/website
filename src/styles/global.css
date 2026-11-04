@@ -209,7 +209,7 @@ hr.wp-block-separator.has-alpha-channel-opacity { opacity: 1; }
 
 /* ---------- posts & newsroom ---------- */
 .post-header { padding: var(--wp--preset--spacing--60) var(--wp--preset--spacing--50) var(--wp--preset--spacing--30); max-width: var(--content-size); margin-inline: auto; }
-.post-header time { display: block; margin-top: 0.75rem; font-size: var(--wp--preset--font-size--small); }
+.post-header .post-meta { margin-top: 0.75rem; }
 .news-card { border-radius: 12px; padding: var(--wp--preset--spacing--30) 0 var(--wp--preset--spacing--40); }
 .news-card__body { padding-inline: var(--wp--preset--spacing--40); display: grid; gap: var(--wp--preset--spacing--20); }
 .news-card h3 a { color: var(--wp--preset--color--contrast); text-decoration: none; }

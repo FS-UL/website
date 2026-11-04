@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import { formatDate } from '../consts';
+import PostMeta from '../components/PostMeta.astro';
 
 // Posts live at /<slug>/ to keep the WordPress "/%postname%/" permalinks.
 export async function getStaticPaths() {
@@ -15,7 +15,7 @@ const { Content } = await render(post);
 <Layout title={post.data.title}>
   <header class="post-header">
     <h1 class="wp-block-heading">{post.data.title}</h1>
-    <time class="has-accent-2-color" datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+    <PostMeta date={post.data.date} author={post.data.author} />
   </header>
   <article class="post-content alignfull">
     <Content />

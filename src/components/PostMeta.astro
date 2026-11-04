@@ -1,0 +1,20 @@
+---
+import { formatDate } from '../consts';
+interface Props {
+  date: Date;
+  author: string;
+}
+const { date, author } = Astro.props;
+---
+<p class="post-meta has-small-font-size">
+  <time datetime={date.toISOString()}>{formatDate(date)}</time>
+  <span class="post-meta__sep" aria-hidden="true">·</span>
+  <span class="post-meta__author">By {author}</span>
+</p>
+
+<style>
+  .post-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 0.6rem; margin: 0; }
+  time { color: var(--wp--preset--color--accent-2); }
+  .post-meta__sep { color: var(--wp--preset--color--accent-4); }
+  .post-meta__author { color: var(--wp--preset--color--accent-4); font-weight: 700; }
+</style>
