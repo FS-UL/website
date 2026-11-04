@@ -1,0 +1,18 @@
+---
+import { posts, base, formatDate } from '../lib.js';
+// Replaces the WordPress "News Posts" query block (all posts, newest first, 9 per page).
+const items = posts.slice(0, 9);
+---
+<div class="wp-block-query">
+  <div class="wp-block-post-template is-layout-grid" style="--block-gap:var(--wp--preset--spacing--40);grid-template-columns:repeat(auto-fill,minmax(min(18rem,100%),1fr))">
+    {items.map((p) => (
+      <div class="wp-block-group has-accent-5-background-color has-background news-card is-layout-constrained">
+        <div class="news-card__body">
+          <time class="has-accent-2-color has-text-color has-small-font-size" datetime={p.date}>{formatDate(p.date)}</time>
+          <h3 class="wp-block-heading has-contrast-color has-text-color has-large-font-size"><a href={`${base}/${p.slug}/`}>{p.title}</a></h3>
+          <p class="has-contrast-color has-text-color has-small-font-size">{p.excerpt}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

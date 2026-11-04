@@ -1,0 +1,74 @@
+---
+import '../styles/global.css';
+import '../styles/flip-cards.css';
+import { base, nav, fontsCss, SITE_NAME } from '../lib.js';
+const { title } = Astro.props;
+const fullTitle = title ? `${title} – ${SITE_NAME}` : SITE_NAME;
+const path = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content="A student-led motorsport team at the University of Limerick. We design, build and race a single-seater every year." />
+    <link rel="icon" href={`${base}/wp-content/uploads/2026/09/Logo-White-edited-150x150.png`} />
+    <style set:html={fontsCss}></style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="site-title" href={`${base}/`}>{SITE_NAME}</a>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <nav id="site-nav" aria-label="Main">
+          <ul>
+            {nav.map((n) => (
+              <li><a href={n.external ? n.href : `${base}${n.href}`} aria-current={path === `${base}${n.href}` ? 'page' : undefined} target={n.external ? '_blank' : undefined} rel={n.external ? 'noopener' : undefined}>{n.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="is-layout-constrained"><slot /></main>
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div class="footer-grid">
+          <div class="footer-about">
+            <a class="footer-brand" href={`${base}/`}>
+              <img src={`${base}/wp-content/uploads/2026/09/Logo-White-edited.png`} alt="" width="56" height="59" />
+              <span class="site-title">{SITE_NAME}</span>
+            </a>
+            <p class="has-small-font-size">A student-led motorsport team at the University of Limerick. We design, build and race a single-seater every year.</p>
+          </div>
+          <div class="footer-col">
+            <p class="footer-heading">Explore</p>
+            <ul>
+              {nav.map((n) => (
+                <li><a href={n.external ? n.href : `${base}${n.href}`} target={n.external ? '_blank' : undefined} rel={n.external ? 'noopener' : undefined}>{n.label}</a></li>
+              ))}
+            </ul>
+          </div>
+          <div class="footer-col">
+            <p class="footer-heading">Partner with us</p>
+            <p class="has-small-font-size">Help put the next generation of engineers on the grid.</p>
+            <div class="wp-block-buttons"><div class="wp-block-button"><a class="wp-block-button__link has-base-color has-accent-2-background-color has-text-color has-background wp-element-button" href={`${base}/ourpartners/`} style="font-weight:700">Become a partner</a></div></div>
+          </div>
+        </div>
+        <hr />
+        <p class="has-accent-4-color has-small-font-size">© {new Date().getFullYear()} {SITE_NAME}</p>
+      </div>
+    </footer>
+    <script>
+      import '../scripts/flip-cards.js';
+      const btn = document.querySelector('.nav-toggle');
+      btn?.addEventListener('click', () => {
+        const open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!open));
+        document.getElementById('site-nav')?.classList.toggle('is-open', !open);
+      });
+    </script>
+  </body>
+</html>

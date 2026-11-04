@@ -1,0 +1,7 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WPContent from '../components/WPContent.astro';
+import { pages } from '../lib.js';
+const home = pages.find((p) => p.slug === '');
+---
+<Layout><WPContent html={home.html} /></Layout>

@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WPContent from '../components/WPContent.astro';
+import { pages, posts, formatDate } from '../lib.js';
+
+export function getStaticPaths() {
+  return [
+    ...pages.filter((p) => p.slug).map((p) => ({ params: { slug: p.slug }, props: { entry: p, kind: 'page' } })),
+    ...posts.map((p) => ({ params: { slug: p.slug }, props: { entry: p, kind: 'post' } })),
+  ];
+}
+const { entry, kind } = Astro.props;
+---
+<Layout title={entry.title}>
+  {kind === 'post' && (
+    <header class="post-header">
+      <h1 class="wp-block-heading">{entry.title}</h1>
+      <time class="has-accent-2-color" datetime={entry.date}>{formatDate(entry.date)}</time>
+    </header>
+  )}
+  <WPContent html={entry.html} />
+</Layout>
