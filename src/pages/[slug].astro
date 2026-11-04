@@ -1,22 +1,23 @@
 ---
+import { getCollection, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import WPContent from '../components/WPContent.astro';
-import { pages, posts, formatDate } from '../lib.js';
+import { formatDate } from '../consts';
 
-export function getStaticPaths() {
-  return [
-    ...pages.filter((p) => p.slug).map((p) => ({ params: { slug: p.slug }, props: { entry: p, kind: 'page' } })),
-    ...posts.map((p) => ({ params: { slug: p.slug }, props: { entry: p, kind: 'post' } })),
-  ];
+// Posts live at /<slug>/ to keep the WordPress "/%postname%/" permalinks.
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
 }
-const { entry, kind } = Astro.props;
+
+const { post } = Astro.props;
+const { Content } = await render(post);
 ---
-<Layout title={entry.title}>
-  {kind === 'post' && (
-    <header class="post-header">
-      <h1 class="wp-block-heading">{entry.title}</h1>
-      <time class="has-accent-2-color" datetime={entry.date}>{formatDate(entry.date)}</time>
-    </header>
-  )}
-  <WPContent html={entry.html} />
+<Layout title={post.data.title}>
+  <header class="post-header">
+    <h1 class="wp-block-heading">{post.data.title}</h1>
+    <time class="has-accent-2-color" datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+  </header>
+  <article class="post-content alignfull">
+    <Content />
+  </article>
 </Layout>

@@ -11,19 +11,23 @@ npm run build    # outputs ./dist
 
 ## Structure
 
-- `src/content/pages/*.html`, `src/content/posts/*.html` – page/post bodies converted from the WordPress block editor (edit these directly).
-- `src/content/site.json` – titles, slugs and dates for pages and posts.
-- `src/lib.js` – navigation, helpers.
-- `src/styles/global.css` – recreation of the WordPress theme (palette, fonts, layout, core blocks).
-- `src/styles/flip-cards.css`, `src/scripts/flip-cards.js` – the `fsul-flip-cards` plugin, ported as-is.
-- `public/wp-content/uploads/` – media, kept at the original WordPress paths.
-
-URLs match WordPress (`/%postname%/`): `/newsroom/`, `/ourpartners/`, `/september-october-update/`, etc.
+| Path | What |
+| --- | --- |
+| `src/pages/*.astro` | Pages (`index`, `newsroom`, `ourpartners`, `our-car`, `meet-the-team`). Each is a normal Astro page wrapped in `Layout`. |
+| `src/pages/[slug].astro` | Renders news posts at `/<slug>/` (WordPress `/%postname%/` permalinks). |
+| `src/content/posts/*.md` | News posts as Markdown (`title`, `date`, optional `excerpt` frontmatter). Add a file here to publish a post. |
+| `src/content.config.ts` | Content collection schema for posts. |
+| `src/layouts/Layout.astro`, `src/components/` | Header, footer, news grid. |
+| `src/consts.ts` | Site name, navigation, date formatting. |
+| `src/assets/` | Images and the Barlow/Orbitron fonts. Images are optimised by Astro at build time. |
+| `src/styles/global.css` | Theme (palette, fonts, layout, WordPress block styles used by the pages). |
+| `src/styles/flip-cards.css`, `src/scripts/flip-cards.js` | The old `fsul-flip-cards` plugin, ported as-is (team cards). |
+| `public/` | Files served as-is (favicon). |
 
 ## Deploying to GitHub Pages
 
-1. In the repo: **Settings → Pages → Source: GitHub Actions**.
-2. Push to `main`; `.github/workflows/deploy.yml` builds and deploys.
+Pushing to `main` runs `.github/workflows/deploy.yml`, which builds and deploys. Pages must be set to
+**Settings → Pages → Source: GitHub Actions**. The site is served at `https://<owner>.github.io/<repo>/`.
 
-By default the site is served at `https://<owner>.github.io/<repo>/`. For a custom domain, set `SITE_URL` to the
-domain and `BASE_PATH` to `/` in the workflow, and add a `public/CNAME` file containing the domain.
+For a custom domain, set `SITE_URL` to the domain and `BASE_PATH` to `/` in the workflow, and add a
+`public/CNAME` file containing the domain.

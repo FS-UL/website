@@ -1,6 +1,14 @@
 /* Recreates the WordPress "Twenty Twenty-Five" theme (as customised for Formula Student UL)
    plus the subset of WordPress core block styles used by the migrated content. */
 
+/* Only the two typefaces (and weights) the design uses. Vite rewrites these URLs for the deploy base path. */
+@font-face { font-family: Barlow; font-weight: 400; font-style: normal; font-display: swap; src: url('../assets/fonts/Barlow-400.woff2') format('woff2'); }
+@font-face { font-family: Barlow; font-weight: 700; font-style: normal; font-display: swap; src: url('../assets/fonts/Barlow-700.woff2') format('woff2'); }
+@font-face { font-family: Orbitron; font-weight: 400; font-style: normal; font-display: swap; src: url('../assets/fonts/Orbitron-400.woff2') format('woff2'); }
+@font-face { font-family: Orbitron; font-weight: 700; font-style: normal; font-display: swap; src: url('../assets/fonts/Orbitron-700.woff2') format('woff2'); }
+@font-face { font-family: Orbitron; font-weight: 800; font-style: normal; font-display: swap; src: url('../assets/fonts/Orbitron-800.woff2') format('woff2'); }
+@font-face { font-family: Orbitron; font-weight: 900; font-style: normal; font-display: swap; src: url('../assets/fonts/Orbitron-900.woff2') format('woff2'); }
+
 :root {
   --wp--preset--color--base: #292929;
   --wp--preset--color--contrast: #f0f0f0;
@@ -86,6 +94,7 @@ p { margin-block: 0; }
 .has-xx-large-font-size { font-size: var(--wp--preset--font-size--xx-large) !important; }
 .has-barlow-font-family { font-family: var(--wp--preset--font-family--barlow) !important; }
 .has-orbitron-font-family { font-family: var(--wp--preset--font-family--orbitron) !important; }
+.has-text-align-left { text-align: left; }
 .has-text-align-center { text-align: center; }
 .has-text-align-right { text-align: right; }
 
@@ -156,7 +165,7 @@ main > * + * { margin-block-start: 0; }
 .wp-block-image img { vertical-align: bottom; max-width: 100%; height: auto; }
 .wp-block-image.aligncenter, .wp-block-image .aligncenter { text-align: center; margin-inline: auto; }
 .wp-block-image.is-resized { max-width: 100%; }
-.wp-block-image figcaption { font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--accent-2); font-weight: 300; margin-top: 0.5em; }
+.wp-block-image figcaption { font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--accent-2); font-weight: 400; margin-top: 0.5em; }
 
 .wp-block-buttons.is-layout-flex { gap: 0.7em; align-items: center; }
 .wp-block-button__link {
@@ -198,8 +207,8 @@ hr.wp-block-separator.has-alpha-channel-opacity { opacity: 1; }
   position: relative;
 }
 .site-title {
-  font-family: var(--wp--preset--font-family--barlow);
-  font-weight: 700; letter-spacing: 1px; text-decoration: none;
+  font-family: var(--wp--preset--font-family--orbitron);
+  font-weight: 900; letter-spacing: 1px; text-decoration: none;
   color: var(--wp--preset--color--accent-2);
   font-size: var(--wp--preset--font-size--large);
 }
@@ -247,3 +256,14 @@ hr.wp-block-separator.has-alpha-channel-opacity { opacity: 1; }
 .news-card h3 a:hover { color: var(--wp--preset--color--accent-2); }
 .wp-block-query { max-width: var(--wide-size); margin-inline: auto; }
 .wp-block-post-template { list-style: none; padding: 0; margin: 0; }
+
+/* Markdown posts: each "## Heading" section becomes a full-width coloured band (see rehypeSections in astro.config.mjs). */
+.post-content { margin-top: var(--wp--preset--spacing--30); }
+.post-section { padding: var(--wp--preset--spacing--50); }
+.post-section--intro { padding-bottom: var(--wp--preset--spacing--40); }
+.post-section:nth-of-type(even) { background: var(--wp--preset--color--accent-3); }
+.post-section:nth-of-type(odd):not(:first-of-type) { background: var(--wp--preset--color--accent-1); }
+.post-section > * { max-width: var(--content-size); margin-inline: auto; }
+.post-section > * + * { margin-block-start: var(--block-gap); }
+.post-section h2 { font-size: var(--wp--preset--font-size--large); color: var(--wp--preset--color--contrast); }
+.post-section img { display: block; width: 100%; height: auto; }

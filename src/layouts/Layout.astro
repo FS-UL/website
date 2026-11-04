@@ -1,8 +1,13 @@
 ---
 import '../styles/global.css';
 import '../styles/flip-cards.css';
-import { base, nav, fontsCss, SITE_NAME } from '../lib.js';
-const { title } = Astro.props;
+import { Image } from 'astro:assets';
+import { base, nav, SITE_NAME, SITE_DESCRIPTION } from '../consts';
+import logo from '../assets/uploads/2026/09/Logo-White-edited.png';
+import barlow400 from '../assets/fonts/Barlow-400.woff2?url';
+import orbitron700 from '../assets/fonts/Orbitron-700.woff2?url';
+import orbitron900 from '../assets/fonts/Orbitron-900.woff2?url';
+const { title, description = SITE_DESCRIPTION } = Astro.props;
 const fullTitle = title ? `${title} – ${SITE_NAME}` : SITE_NAME;
 const path = Astro.url.pathname;
 ---
@@ -12,9 +17,9 @@ const path = Astro.url.pathname;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
-    <meta name="description" content="A student-led motorsport team at the University of Limerick. We design, build and race a single-seater every year." />
-    <link rel="icon" href={`${base}/wp-content/uploads/2026/09/Logo-White-edited-150x150.png`} />
-    <style set:html={fontsCss}></style>
+    <meta name="description" content={description} />
+    <link rel="icon" href={`${base}/favicon.png`} />
+    {[barlow400, orbitron700, orbitron900].map((href) => <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />)}
   </head>
   <body>
     <header class="site-header">
@@ -38,10 +43,10 @@ const path = Astro.url.pathname;
         <div class="footer-grid">
           <div class="footer-about">
             <a class="footer-brand" href={`${base}/`}>
-              <img src={`${base}/wp-content/uploads/2026/09/Logo-White-edited.png`} alt="" width="56" height="59" />
+              <Image src={logo} alt="" width={112} format="webp" />
               <span class="site-title">{SITE_NAME}</span>
             </a>
-            <p class="has-small-font-size">A student-led motorsport team at the University of Limerick. We design, build and race a single-seater every year.</p>
+            <p class="has-small-font-size">{SITE_DESCRIPTION}</p>
           </div>
           <div class="footer-col">
             <p class="footer-heading">Explore</p>
