@@ -1,0 +1,52 @@
+---
+import { Image } from 'astro:assets';
+import { base, nav, SITE_NAME, SITE_DESCRIPTION } from '../consts';
+import logo from '../assets/uploads/2026/09/Logo-White-edited.png';
+---
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a class="footer-brand" href={`${base}/`}>
+          <Image src={logo} alt="" width={112} format="webp" />
+          <span class="site-title">{SITE_NAME}</span>
+        </a>
+        <p class="has-small-font-size">{SITE_DESCRIPTION}</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">Explore</p>
+        <ul>
+          {nav.map((n) => (
+            <li><a href={n.external ? n.href : `${base}${n.href}`} target={n.external ? '_blank' : undefined} rel={n.external ? 'noopener' : undefined}>{n.label}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">Partner with us</p>
+        <p class="has-small-font-size">Help put the next generation of engineers on the grid.</p>
+        <div class="wp-block-buttons"><div class="wp-block-button"><a class="wp-block-button__link has-base-color has-accent-2-background-color has-text-color has-background wp-element-button" href={`${base}/ourpartners/`} style="font-weight:700">Become a partner</a></div></div>
+      </div>
+    </div>
+    <hr />
+    <p class="has-accent-4-color has-small-font-size">© {new Date().getFullYear()} {SITE_NAME}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--wp--preset--color--base);
+    border-top: 1px solid var(--wp--preset--color--accent-5);
+    padding: var(--wp--preset--spacing--60) var(--wp--preset--spacing--50) var(--wp--preset--spacing--40);
+  }
+  .site-footer__inner { max-width: var(--wide-size); margin-inline: auto; }
+  .footer-grid { display: grid; grid-template-columns: 45fr 20fr 35fr; gap: var(--wp--preset--spacing--50) var(--wp--preset--spacing--60); }
+  @media (max-width: 781px) { .footer-grid { grid-template-columns: 1fr; } }
+  .footer-brand { display: flex; align-items: center; gap: 1rem; text-decoration: none; margin-bottom: var(--wp--preset--spacing--30); }
+  .footer-brand :global(img) { width: 56px; height: auto; }
+  .footer-heading { color: var(--wp--preset--color--accent-2); font-size: var(--wp--preset--font-size--small); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: var(--wp--preset--spacing--20); }
+  .footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+  .footer-col a:not(.wp-block-button__link) { color: var(--wp--preset--color--contrast); text-decoration: none; font-size: var(--wp--preset--font-size--small); }
+  .footer-col a:not(.wp-block-button__link):hover { color: var(--wp--preset--color--accent-2); }
+  .footer-col .wp-block-buttons { margin-top: var(--wp--preset--spacing--30); }
+  hr { border: 0; border-top: 1px solid var(--wp--preset--color--accent-5); margin-block: var(--wp--preset--spacing--40); }
+</style>

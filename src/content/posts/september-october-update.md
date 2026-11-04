@@ -101,4 +101,5 @@ Members of the Formula Student UL team were at the UL Open Days in October to hi
 
 **The team also had the opportunity to set up a stand outside the Student Life Building during week 2 of the semester. This gave the team the opportunity to promote the brand and recruit new team members.**
 
-**All the best,Formula Student UL**
+**All the best,
+Formula Student UL**
