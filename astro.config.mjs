@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 // Wraps the content after each "## Heading" in a <section> so posts can be styled as full-width bands.
 // Anything before the first heading becomes an intro section.
@@ -29,9 +30,10 @@ const base = process.env.BASE_PATH || '/';
 // SITE_URL / BASE_PATH are set by the GitHub Actions workflow.
 // For a custom domain, set SITE_URL=https://yourdomain.com and BASE_PATH=/ .
 export default defineConfig({
-  site: process.env.SITE_URL || 'http://localhost:4321',
+  site: process.env.SITE_URL || 'https://fsul.ie',
   base,
   trailingSlash: 'always',
+  integrations: [sitemap()],
   markdown: { rehypePlugins: [rehypeSections] },
   redirects: {
     // The old WordPress nav menu linked to this slug; the page's real slug is /ourpartners/
