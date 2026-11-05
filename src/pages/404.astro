@@ -1,11 +1,21 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { base } from '../consts';
+import Layout from "../layouts/Layout.astro";
+import { base } from "../consts";
 ---
+
 <Layout title="Page not found" noindex>
-  <div class="wp-block-group alignfull is-layout-constrained" style="padding:var(--wp--preset--spacing--60) var(--wp--preset--spacing--50);text-align:center">
-    <h1 class="wp-block-heading">404</h1>
-    <p>Looks like this lap ended in the gravel. The page you're after doesn't exist or has moved.</p>
-    <p><a href={`${base}/`}>Back to the pits</a> · <a href={`${base}/newsroom/`}>Newsroom</a></p>
-  </div>
+    <div
+        class="wp-block-group alignfull is-layout-constrained"
+        style="padding:var(--wp--preset--spacing--60) var(--wp--preset--spacing--50);text-align:center"
+    >
+        <h1 class="wp-block-heading">404</h1>
+        <p>
+            Looks like this lap ended in the gravel. The page you're after
+            doesn't exist or has moved.
+        </p>
+        <p>
+            <a href={`${base}/`}>Back to the homepage</a> ·{" "}
+            <a href={`${base}/newsroom/`}>Newsroom</a>
+        </p>
+    </div>
 </Layout>
