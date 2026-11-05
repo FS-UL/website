@@ -11,13 +11,10 @@
 
 :root {
   --wp--preset--color--base: #292929;
-  --wp--preset--color--contrast: #f0f0f0;
-  --wp--preset--color--accent-1: #005335;
-  --wp--preset--color--accent-2: #00b140;
-  --wp--preset--color--accent-3: #003726;
-  --wp--preset--color--accent-4: #cbcbcb;
-  --wp--preset--color--accent-5: #353535;
-  --wp--preset--color--accent-6: #ffffff33;
+  --wp--preset--color--contrast: #ffffff;
+  --wp--preset--color--accent-1: #00533f;
+  --wp--preset--color--accent-2: #00b16c;
+  --wp--preset--color--accent-3: #00372d;
 
   --wp--preset--spacing--20: 10px;
   --wp--preset--spacing--30: 20px;
