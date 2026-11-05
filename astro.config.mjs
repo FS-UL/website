@@ -1,5 +1,4 @@
 import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
 
 // Wraps the content after each "## Heading" in a <section> so posts can be styled as full-width bands.
 // Anything before the first heading becomes an intro section.
@@ -33,9 +32,11 @@ export default defineConfig({
   site: process.env.SITE_URL || 'https://fsul.ie',
   base,
   trailingSlash: 'always',
-  integrations: [sitemap()],
   markdown: { rehypePlugins: [rehypeSections] },
   redirects: {
+    // Old slugs
+    '/meet-the-team': `${base.replace(/\/$/, '')}/meettheteam/`,
+    '/our-car': `${base.replace(/\/$/, '')}/ourcar/`,
     // The old WordPress nav menu linked to this slug; the page's real slug is /ourpartners/
     // (redirect targets are not base-aware, so prefix it manually)
     '/our-partners': `${base.replace(/\/$/, '')}/ourpartners/`,

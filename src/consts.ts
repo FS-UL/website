@@ -8,8 +8,8 @@ export const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 export const nav = [
   { label: 'Our Partners', href: '/ourpartners/' },
   { label: 'Newsroom', href: '/newsroom/' },
-  { label: 'Meet the Team', href: '/meet-the-team/' },
-  { label: 'Our Car', href: '/our-car/' },
+  { label: 'Meet the Team', href: '/meettheteam/' },
+  { label: 'Our Car', href: '/ourcar/' },
   { label: 'Instagram', href: 'https://www.instagram.com/formulastudentul/', external: true },
 ];
 
