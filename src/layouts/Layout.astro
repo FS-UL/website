@@ -1,81 +1,112 @@
 ---
-import '../styles/global.css';
-import '../styles/flip-cards.css';
-import { base, SITE_NAME, SITE_DESCRIPTION } from '../consts';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { getImage } from 'astro:assets';
-import ogSource from '../assets/team-silverstone.png';
-import barlow400 from '../assets/fonts/Barlow-400.woff2?url';
-import orbitron700 from '../assets/fonts/Orbitron-700.woff2?url';
-import orbitron900 from '../assets/fonts/Orbitron-900.woff2?url';
-const { title, description = SITE_DESCRIPTION, type = 'website', publishedTime, author, noindex = false } = Astro.props;
+import "../styles/global.css";
+import "../styles/flip-cards.css";
+import { base, SITE_NAME, SITE_DESCRIPTION } from "../consts";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { getImage } from "astro:assets";
+import ogSource from "../assets/team-silverstone.png";
+import barlow400 from "../assets/fonts/Barlow-400.woff2?url";
+import orbitron700 from "../assets/fonts/Orbitron-700.woff2?url";
+import orbitron900 from "../assets/fonts/Orbitron-900.woff2?url";
+const {
+    title,
+    description = SITE_DESCRIPTION,
+    type = "website",
+    publishedTime,
+    author,
+    noindex = false,
+} = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
-const og = await getImage({ src: ogSource, width: 1200, height: 630, fit: 'cover', format: 'jpg', quality: 80 });
+const og = await getImage({
+    src: ogSource,
+    width: 1200,
+    height: 630,
+    fit: "cover",
+    format: "jpg",
+    quality: 80,
+});
 const ogImage = new URL(og.src, Astro.site).href;
 const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'Organization',
-      '@id': new URL('/#org', Astro.site).href,
-      name: SITE_NAME,
-      url: new URL('/', Astro.site).href,
-      logo: new URL(`${base}/favicon.png`, Astro.site).href,
-      description: SITE_DESCRIPTION,
-      sameAs: ['https://www.instagram.com/formulastudentul/'],
-    },
-    ...(type === 'article'
-      ? [{
-          '@type': 'BlogPosting',
-          headline: title,
-          description,
-          image: ogImage,
-          datePublished: publishedTime,
-          author: author ? { '@type': 'Person', name: author } : undefined,
-          publisher: { '@id': new URL('/#org', Astro.site).href },
-          mainEntityOfPage: canonical,
-        }]
-      : []),
-  ],
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": new URL("/#org", Astro.site).href,
+            name: SITE_NAME,
+            url: new URL("/", Astro.site).href,
+            logo: new URL(`${base}/favicon.png`, Astro.site).href,
+            description: SITE_DESCRIPTION,
+            sameAs: ["https://www.instagram.com/formulastudentul/"],
+        },
+        ...(type === "article"
+            ? [
+                  {
+                      "@type": "BlogPosting",
+                      headline: title,
+                      description,
+                      image: ogImage,
+                      datePublished: publishedTime,
+                      author: author
+                          ? { "@type": "Person", name: author }
+                          : undefined,
+                      publisher: { "@id": new URL("/#org", Astro.site).href },
+                      mainEntityOfPage: canonical,
+                  },
+              ]
+            : []),
+    ],
 };
-const fullTitle = title ? `${title} – ${SITE_NAME}` : SITE_NAME;
+const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
 ---
+
 <!doctype html>
 <html lang="en-GB">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{fullTitle}</title>
-    <meta name="description" content={description} />
-    <link rel="icon" href={`${base}/favicon.png`} />
-    <link rel="canonical" href={canonical} />
-    <link rel="sitemap" href={`${base}/sitemap.xml`} />
-    {noindex && <meta name="robots" content="noindex" />}
-    <meta name="theme-color" content="#000000" />
-    <meta property="og:site_name" content={SITE_NAME} />
-    <meta property="og:locale" content="en_GB" />
-    <meta property="og:type" content={type} />
-    <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    {type === 'article' && publishedTime && <meta property="article:published_time" content={publishedTime} />}
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-    {[barlow400, orbitron700, orbitron900].map((href) => <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />)}
-  </head>
-  <body>
-    <Header />
-    <main class="is-layout-constrained"><slot /></main>
-    <Footer />
-    <script>
-      import '../scripts/flip-cards.js';
-    </script>
-  </body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{fullTitle}</title>
+        <meta name="description" content={description} />
+        <link rel="icon" href={`${base}/favicon.png`} />
+        <link rel="canonical" href={canonical} />
+        <link rel="sitemap" href={`${base}/sitemap.xml`} />
+        {noindex && <meta name="robots" content="noindex" />}
+        <meta name="theme-color" content="#000000" />
+        <meta property="og:site_name" content={SITE_NAME} />
+        <meta property="og:locale" content="en_GB" />
+        <meta property="og:type" content={type} />
+        <meta property="og:title" content={fullTitle} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        {type === "article" && publishedTime && (
+            <meta property="article:published_time" content={publishedTime} />
+        )}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={fullTitle} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={ogImage} />
+        <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+        {[barlow400, orbitron700, orbitron900].map((href) => (
+            <link
+                rel="preload"
+                href={href}
+                as="font"
+                type="font/woff2"
+                crossorigin
+            />
+        ))}
+    </head>
+    <body>
+        <Header />
+        <main class="is-layout-constrained">
+            <slot />
+        </main>
+        <Footer />
+        <script>
+            import "../scripts/flip-cards.js";
+        </script>
+    </body>
 </html>
