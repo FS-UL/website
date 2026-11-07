@@ -1,5 +1,5 @@
-/* Recreates the WordPress "Twenty Twenty-Five" theme (as customised for Formula Student UL)
-   plus the subset of WordPress core block styles used by the migrated content. */
+/* Site theme: palette, fonts and base typography (originally recreated from the WordPress "Twenty Twenty-Five" theme).
+   Page sections are built from the components in src/components. */
 
 /* Only the two typefaces (and weights) the design uses. Vite rewrites these URLs for the deploy base path. */
 @font-face { font-family: Barlow; font-weight: 400; font-style: normal; font-display: swap; src: url('../assets/fonts/Barlow-400.woff2') format('woff2'); }
@@ -15,6 +15,11 @@
   --wp--preset--color--accent-1: #00533f;
   --wp--preset--color--accent-2: #00b16c;
   --wp--preset--color--accent-3: #00372d;
+  /* Neutrals (muted text, card surfaces, translucent white). These were dropped when the brand greens changed,
+     which left cards and borders transparent; restored here until the brand guide says otherwise. */
+  --wp--preset--color--accent-4: #cbcbcb;
+  --wp--preset--color--accent-5: #353535;
+  --wp--preset--color--accent-6: #ffffff33;
 
   --wp--preset--spacing--20: 10px;
   --wp--preset--spacing--30: 20px;
@@ -67,133 +72,13 @@ h2 { font-size: var(--wp--preset--font-size--x-large); }
 h3 { font-size: var(--wp--preset--font-size--large); }
 p { margin-block: 0; }
 
-/* ---------- palette / font utility classes (as emitted by the block editor) ---------- */
-.has-base-color { color: var(--wp--preset--color--base) !important; }
-.has-contrast-color { color: var(--wp--preset--color--contrast) !important; }
-.has-accent-1-color { color: var(--wp--preset--color--accent-1) !important; }
-.has-accent-2-color { color: var(--wp--preset--color--accent-2) !important; }
-.has-accent-3-color { color: var(--wp--preset--color--accent-3) !important; }
-.has-accent-4-color { color: var(--wp--preset--color--accent-4) !important; }
-.has-accent-5-color { color: var(--wp--preset--color--accent-5) !important; }
-.has-accent-6-color { color: var(--wp--preset--color--accent-6) !important; }
-.has-base-background-color { background-color: var(--wp--preset--color--base) !important; }
-.has-contrast-background-color { background-color: var(--wp--preset--color--contrast) !important; }
-.has-accent-1-background-color { background-color: var(--wp--preset--color--accent-1) !important; }
-.has-accent-2-background-color { background-color: var(--wp--preset--color--accent-2) !important; }
-.has-accent-3-background-color { background-color: var(--wp--preset--color--accent-3) !important; }
-.has-accent-4-background-color { background-color: var(--wp--preset--color--accent-4) !important; }
-.has-accent-5-background-color { background-color: var(--wp--preset--color--accent-5) !important; }
-.has-accent-6-background-color { background-color: var(--wp--preset--color--accent-6) !important; }
-.has-small-font-size { font-size: var(--wp--preset--font-size--small) !important; }
-.has-medium-font-size { font-size: var(--wp--preset--font-size--medium) !important; }
-.has-large-font-size { font-size: var(--wp--preset--font-size--large) !important; }
-.has-x-large-font-size { font-size: var(--wp--preset--font-size--x-large) !important; }
-.has-xx-large-font-size { font-size: var(--wp--preset--font-size--xx-large) !important; }
-.has-barlow-font-family { font-family: var(--wp--preset--font-family--barlow) !important; }
-.has-orbitron-font-family { font-family: var(--wp--preset--font-family--orbitron) !important; }
-.has-text-align-left { text-align: left; }
-.has-text-align-center { text-align: center; }
-.has-text-align-right { text-align: right; }
+/* ---------- utilities still used by the footer, post meta and a few pages ---------- */
+.has-accent-4-color { color: var(--wp--preset--color--accent-4); }
+.has-small-font-size { font-size: var(--wp--preset--font-size--small); }
+.has-large-font-size { font-size: var(--wp--preset--font-size--large); }
 
-/* ---------- layouts (WordPress emits these server-side; the converter adds the classes) ---------- */
-:where(.is-layout-constrained) > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
-  max-width: var(--content-size);
-  margin-inline: auto;
-}
-:where(.is-layout-constrained) > .alignwide { max-width: var(--wide-size); }
-:where(.is-layout-constrained) > .alignfull { max-width: none; }
-:where(.is-layout-constrained) > * + *,
-:where(.is-layout-flow) > * + * { margin-block-start: var(--block-gap); }
-:where(.is-layout-flow) > .alignfull { max-width: none; }
-.is-layout-flex, .is-layout-grid { gap: var(--block-gap); }
-.is-layout-flex { display: flex; flex-wrap: wrap; align-items: center; }
-.is-layout-grid { display: grid; }
-.is-layout-flex > *, .is-layout-grid > * { margin: 0; }
-
-.alignwide { max-width: var(--wide-size); margin-inline: auto; }
-.alignfull { max-width: none; width: 100%; }
-
-/* ---------- core blocks ---------- */
-.wp-block-group { box-sizing: border-box; }
-/* top-level blocks are separated by the page's own padding, not a flow gap */
+/* Top-level sections (bands, covers, post header) handle their own spacing. */
 main > * + * { margin-block-start: 0; }
-
-.wp-block-columns { display: flex; flex-wrap: nowrap; align-items: normal; gap: var(--block-gap, 2em); }
-.wp-block-column { flex: 1 1 0; min-width: 0; overflow-wrap: break-word; }
-.wp-block-column.is-layout-flow > * + * { margin-block-start: var(--block-gap); }
-.wp-block-column > * + * { margin-block-start: var(--block-gap); }
-@media (max-width: 781px) {
-  .wp-block-columns { flex-wrap: wrap; }
-  .wp-block-column { flex-basis: 100% !important; }
-}
-@media (min-width: 782px) {
-  .wp-block-column[style*="flex-basis"] { flex-grow: 0; }
-}
-
-.wp-block-cover {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1em;
-  overflow: hidden;
-  min-height: 430px;
-  box-sizing: border-box;
-}
-.wp-block-cover__image-background { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; margin: 0; z-index: -1; }
-.wp-block-cover__background { position: absolute; inset: 0; opacity: 0.5; z-index: 0; }
-.wp-block-cover__background.has-background-dim-10 { opacity: 0.1; }
-.wp-block-cover__background.has-background-dim-20 { opacity: 0.2; }
-.wp-block-cover__background.has-background-dim-30 { opacity: 0.3; }
-.wp-block-cover__background.has-background-dim-40 { opacity: 0.4; }
-.wp-block-cover__background.has-background-dim-50 { opacity: 0.5; }
-.wp-block-cover__background.has-background-dim-60 { opacity: 0.6; }
-.wp-block-cover__background.has-background-dim-70 { opacity: 0.7; }
-.wp-block-cover__background.has-background-dim-80 { opacity: 0.8; }
-.wp-block-cover__background.has-background-dim-90 { opacity: 0.9; }
-.wp-block-cover__background.has-background-dim-100 { opacity: 1; }
-.wp-block-cover { isolation: isolate; }
-.wp-block-cover__inner-container { position: relative; z-index: 1; width: 100%; }
-.wp-block-cover__inner-container > * { max-width: var(--content-size); margin-inline: auto; }
-.wp-block-cover__inner-container > .alignwide { max-width: var(--wide-size); }
-.wp-block-cover__inner-container > * + * { margin-block-start: var(--block-gap); }
-
-.wp-block-image { margin-block: 0; }
-.wp-block-image img { vertical-align: bottom; max-width: 100%; height: auto; }
-.wp-block-image.aligncenter, .wp-block-image .aligncenter { text-align: center; margin-inline: auto; }
-.wp-block-image.is-resized { max-width: 100%; }
-.wp-block-image figcaption { font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--accent-2); font-weight: 400; margin-top: 0.5em; }
-
-.wp-block-buttons.is-layout-flex { gap: 0.7em; align-items: center; }
-.wp-block-button__link {
-  display: inline-block;
-  box-sizing: border-box;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  background-color: var(--wp--preset--color--contrast);
-  color: var(--wp--preset--color--base);
-  font-family: var(--wp--preset--font-family--orbitron);
-  font-weight: 800;
-  font-size: var(--wp--preset--font-size--medium);
-  padding: 0.6rem 1.6rem;
-  border: 0;
-  border-radius: 0.33rem;
-  transition: opacity 0.2s;
-}
-.wp-block-button__link:hover { opacity: 0.85; }
-.wp-block-button__link:focus-visible { outline: 2px solid var(--wp--preset--color--accent-4); outline-offset: 2px; }
-.wp-block-button.is-style-outline > .wp-block-button__link:not(.has-background) {
-  background: transparent;
-  color: currentColor;
-  border: 1px solid currentColor;
-  padding: calc(0.6rem - 1px) calc(1.6rem - 1px);
-}
-.wp-block-button.is-style-outline > .wp-block-button__link:not(.has-background):hover { background: color-mix(in srgb, var(--wp--preset--color--contrast) 5%, transparent); opacity: 1; }
-
-.wp-block-separator { border: 0; border-bottom: 1px solid currentColor; margin-block: var(--wp--preset--spacing--40); }
-hr.wp-block-separator.has-alpha-channel-opacity { opacity: 1; }
-.wp-block-separator.is-style-wide { max-width: var(--wide-size); margin-inline: auto; }
 
 /* ---------- site chrome ---------- */
 /* Header and footer styles live in src/components/Header.astro and Footer.astro; the wordmark is shared. */
@@ -204,6 +89,11 @@ hr.wp-block-separator.has-alpha-channel-opacity { opacity: 1; }
   font-size: var(--wp--preset--font-size--large);
 }
 
+/* ---------- headings used across the page components ---------- */
+.section-title { font-size: var(--wp--preset--font-size--xx-large); color: var(--wp--preset--color--contrast); }
+.section-title--accent { color: var(--wp--preset--color--accent-2); }
+.section-title--small { font-size: var(--wp--preset--font-size--x-large); }
+
 /* ---------- posts & newsroom ---------- */
 .post-header { padding: var(--wp--preset--spacing--60) var(--wp--preset--spacing--50) var(--wp--preset--spacing--30); max-width: var(--content-size); margin-inline: auto; }
 .post-header .post-meta { margin-top: 0.75rem; }
@@ -211,11 +101,9 @@ hr.wp-block-separator.has-alpha-channel-opacity { opacity: 1; }
 .news-card__body { padding-inline: var(--wp--preset--spacing--40); display: grid; gap: var(--wp--preset--spacing--20); }
 .news-card h3 a { color: var(--wp--preset--color--contrast); text-decoration: none; }
 .news-card h3 a:hover { color: var(--wp--preset--color--accent-2); }
-.wp-block-query { max-width: var(--wide-size); margin-inline: auto; }
-.wp-block-post-template { list-style: none; padding: 0; margin: 0; }
 
 /* Markdown posts: each "## Heading" section becomes a full-width coloured band (see rehypeSections in astro.config.mjs). */
-.post-content { margin-top: var(--wp--preset--spacing--30); }
+.post-content { margin-top: var(--wp--preset--spacing--30); max-width: none; width: 100%; }
 .post-section { padding: var(--wp--preset--spacing--50); }
 .post-section--intro { padding-bottom: var(--wp--preset--spacing--40); }
 .post-section:nth-of-type(even) { background: var(--wp--preset--color--accent-3); }

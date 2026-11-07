@@ -1,0 +1,30 @@
+---
+// A big number with a label underneath, for use inside <Columns>.
+interface Props {
+    value: string;
+    label: string;
+    /** Large display size (home page) instead of the compact size. */
+    big?: boolean;
+}
+const { value, label, big = false } = Astro.props;
+---
+
+<div class:list={["stat", { "stat--big": big }]}>
+    <h3>{value}</h3>
+    <p>{label}</p>
+</div>
+
+<style>
+    .stat { flex: 1 1 0; min-width: 0; overflow-wrap: break-word; }
+    .stat > * + * { margin-block-start: var(--block-gap); }
+    h3 { color: var(--wp--preset--color--accent-2); }
+    p {
+        font-family: var(--wp--preset--font-family--orbitron);
+        font-size: var(--wp--preset--font-size--small);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--wp--preset--color--contrast);
+    }
+    .stat--big h3 { font-size: clamp(2.25rem, 5vw, 4.5rem); line-height: 1; }
+    .stat--big p { font-size: var(--wp--preset--font-size--medium); }
+</style>

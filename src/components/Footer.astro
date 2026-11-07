@@ -1,6 +1,8 @@
 ---
 import { Image } from 'astro:assets';
 import { base, nav, SITE_NAME, SITE_DESCRIPTION } from '../consts';
+import Buttons from './Buttons.astro';
+import Button from './Button.astro';
 import logo from '../assets/uploads/2026/09/Logo-White-edited.png';
 ---
 <footer class="site-footer">
@@ -24,7 +26,9 @@ import logo from '../assets/uploads/2026/09/Logo-White-edited.png';
       <div class="footer-col">
         <p class="footer-heading">Partner with us</p>
         <p class="has-small-font-size">Help put the next generation of engineers on the grid.</p>
-        <div class="wp-block-buttons"><div class="wp-block-button"><a class="wp-block-button__link has-base-color has-accent-2-background-color has-text-color has-background wp-element-button" href={`${base}/ourpartners/`} style="font-weight:700">Become a partner</a></div></div>
+        <div class="footer-cta">
+          <Buttons><Button href={`${base}/sponsor/`}>Become a partner</Button></Buttons>
+        </div>
       </div>
     </div>
     <hr />
@@ -45,8 +49,8 @@ import logo from '../assets/uploads/2026/09/Logo-White-edited.png';
   .footer-brand :global(img) { width: 56px; height: auto; }
   .footer-heading { font-family: var(--wp--preset--font-family--orbitron); color: var(--wp--preset--color--accent-2); font-size: var(--wp--preset--font-size--small); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: var(--wp--preset--spacing--20); }
   .footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
-  .footer-col a:not(.wp-block-button__link) { color: var(--wp--preset--color--contrast); text-decoration: none; font-size: var(--wp--preset--font-size--small); }
-  .footer-col a:not(.wp-block-button__link):hover { color: var(--wp--preset--color--accent-2); }
-  .footer-col .wp-block-buttons { margin-top: var(--wp--preset--spacing--30); }
+  .footer-col a { color: var(--wp--preset--color--contrast); text-decoration: none; font-size: var(--wp--preset--font-size--small); }
+  .footer-col a:hover { color: var(--wp--preset--color--accent-2); }
+  .footer-cta { margin-top: var(--wp--preset--spacing--30); }
   hr { border: 0; border-top: 1px solid var(--wp--preset--color--accent-5); margin-block: var(--wp--preset--spacing--40); }
 </style>

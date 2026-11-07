@@ -1,0 +1,41 @@
+---
+// Full-width coloured section with centred content. Replaces the WordPress "wp-block-group alignfull" markup.
+interface Props {
+    bg?: "none" | "base" | "accent-2" | "accent-3" | "accent-5";
+    /** Vertical padding step: 50 is tighter than 60. */
+    pad?: 50 | 60;
+    /** Maximum width of the content column in px. */
+    size?: 800 | 1200;
+    /** Overrides the space between children. */
+    gap?: string;
+}
+const { bg = "none", pad = 60, size = 1200, gap } = Astro.props;
+const vars = [`--band-size:${size}px`, gap && `--block-gap:${gap}`].filter(Boolean).join(";");
+---
+
+<div class:list={["band", `band--${bg}`, `band--pad-${pad}`]} style={vars}><slot /></div>
+
+<style>
+    .band {
+        width: 100%;
+        box-sizing: border-box;
+        padding-inline: var(--wp--preset--spacing--50);
+    }
+    .band--pad-50 { padding-block: var(--wp--preset--spacing--50); }
+    .band--pad-60 { padding-block: var(--wp--preset--spacing--60); }
+    .band--base { background-color: var(--wp--preset--color--base); }
+    .band--accent-2 { background-color: var(--wp--preset--color--accent-2); }
+    .band--accent-3 { background-color: var(--wp--preset--color--accent-3); }
+    .band--accent-5 { background-color: var(--wp--preset--color--accent-5); }
+</style>
+
+<style is:global>
+    /* Zero specificity on purpose: element rules such as `p { margin-block: 0 }` win over the spacing. */
+    :where(.band) > :where(*) {
+        max-width: var(--band-size);
+        margin-inline: auto;
+    }
+    :where(.band) > * + * {
+        margin-block-start: var(--block-gap);
+    }
+</style>

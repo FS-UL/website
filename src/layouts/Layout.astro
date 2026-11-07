@@ -17,10 +17,13 @@ const {
     publishedTime,
     author,
     noindex = false,
+    image = ogSource,
+    prev,
+    next,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const og = await getImage({
-    src: ogSource,
+    src: image,
     width: 1200,
     height: 630,
     fit: "cover",
@@ -96,7 +99,15 @@ const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
                 image: ogImage,
             }}
         />
-        <link rel="icon" href={`${base}/favicon.png`} />
+        <link rel="icon" type="image/png" href={`${base}/favicon.png`} />
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title={`${SITE_NAME} news`}
+            href={`${base}/rss.xml`}
+        />
+        {prev && <link rel="prev" href={prev} />}
+        {next && <link rel="next" href={next} />}
         <link rel="sitemap" href={`${base}/sitemap-index.xml`} />
         <meta name="theme-color" content="#000000" />
         <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
@@ -112,7 +123,7 @@ const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
     </head>
     <body>
         <Header />
-        <main class="is-layout-constrained">
+        <main>
             <slot />
         </main>
         <Footer />

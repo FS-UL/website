@@ -1,0 +1,27 @@
+---
+// Closing call-to-action banner. Put <Button>s in a <Buttons> row inside the slot.
+import Cover from "./Cover.astro";
+
+interface Props {
+    title: string;
+    text: string;
+}
+const { title, text } = Astro.props;
+---
+
+<Cover minHeight={360} inset>
+    <h2>{title}</h2>
+    <p>{text}</p>
+    <slot />
+</Cover>
+
+<style>
+    h2 {
+        font-size: var(--wp--preset--font-size--xx-large);
+        color: var(--wp--preset--color--contrast);
+    }
+    p {
+        font-size: var(--wp--preset--font-size--large);
+        color: var(--wp--preset--color--contrast);
+    }
+</style>

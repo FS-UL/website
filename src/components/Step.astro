@@ -1,0 +1,22 @@
+---
+// A numbered step with a short description, for use inside <Columns>.
+interface Props {
+    number: string;
+    title: string;
+}
+const { number, title } = Astro.props;
+---
+
+<div class="step">
+    <h3>{number}</h3>
+    <h4>{title}</h4>
+    <p><slot /></p>
+</div>
+
+<style>
+    .step { flex: 1 1 0; min-width: 0; overflow-wrap: break-word; }
+    .step > * + * { margin-block-start: var(--block-gap); }
+    h3 { color: var(--wp--preset--color--accent-2); }
+    h4 { color: var(--wp--preset--color--contrast); }
+    p { font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--contrast); }
+</style>

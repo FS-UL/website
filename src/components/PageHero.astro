@@ -1,0 +1,36 @@
+---
+// Top-of-page banner: big title with optional subtitle and intro line.
+import Cover from "./Cover.astro";
+
+interface Props {
+    title: string;
+    subtitle?: string;
+    lede?: string;
+    minHeight?: number;
+}
+const { title, subtitle, lede, minHeight = 166 } = Astro.props;
+---
+
+<Cover {minHeight}>
+    <h1>{title}</h1>
+    {subtitle && <h2>{subtitle}</h2>}
+    {lede && <p>{lede}</p>}
+</Cover>
+
+<style>
+    h1 {
+        font-size: 5rem;
+        color: var(--wp--preset--color--contrast);
+        text-align: left;
+    }
+    h2 {
+        font-size: var(--wp--preset--font-size--xx-large);
+        color: var(--wp--preset--color--accent-2);
+        text-align: left;
+    }
+    p {
+        font-size: var(--wp--preset--font-size--medium);
+        color: var(--wp--preset--color--contrast);
+        text-align: left;
+    }
+</style>

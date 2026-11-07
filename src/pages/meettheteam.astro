@@ -1,6 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image } from "astro:assets";
+import Band from "../components/Band.astro";
+import CardGrid from "../components/CardGrid.astro";
+import TeamCard from "../components/TeamCard.astro";
 import img0 from "../assets/uploads/2026/10/Daire-No-Background-scaled-e1791317399344-853x1024.png";
 import img1 from "../assets/uploads/2026/10/Elio-Background-Removed-scaled-e1791317385904-811x1024.png";
 import img2 from "../assets/uploads/2026/10/Cormac-No-Background-scaled-e1791317371286-828x1024.png";
@@ -9,280 +11,39 @@ import img4 from "../assets/uploads/2026/10/DSC01433-Background-Removed-scaled-e
 import img5 from "../assets/uploads/2026/10/DSC01438-Background-Removed-scaled-e1791317337220-920x1024.png";
 import img6 from "../assets/uploads/2026/10/DSC01436-Background-Removed-scaled-e1791317324458-896x1024.png";
 import img7 from "../assets/uploads/2026/10/DSC01434-Background-Removed-scaled-e1791317289135-918x1024.png";
+
+const team = [
+    { name: "Daire", role: "Team Manager", photo: img0, bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor." },
+    { name: "Elio", role: "Electrical Team Lead", photo: img1, bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor." },
+    { name: "Cormac", role: "Dynamics Team Lead", photo: img2, bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor." },
+    { name: "Daniel", role: "Aero Team Lead", photo: img3, bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor." },
+    { name: "Elio", role: "Electrical Team Lead", photo: img4, bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor." },
+    { name: "Elio", role: "Electrical Team Lead", photo: img5, bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor." },
+    { name: "JJ", role: "Electrical Team Lead", photo: img6, bio: "I’m a fifth-year MSc Mechanical Engineering student, and this is my second year on the team. Most of my days are spent working towards a competitive Formula Student car to bring to Silverstone in July!" },
+    { name: "Elio", role: "Electrical Team Lead", photo: img7, bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor." },
+]
 ---
 
-<Layout title="Meet the Team">
-    <div
-        class="wp-block-group alignfull has-accent-2-background-color has-background is-layout-constrained"
-        style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--50);--content-size:1200px"
-    >
-        <h1
-            class="wp-block-heading has-text-align-left alignwide has-contrast-color has-text-color has-link-color"
-            style="font-size:5rem"
-        >
-            Meet our Team
-        </h1>
-        <div
-            class="wp-block-group is-layout-grid"
-            style="grid-template-columns:repeat(auto-fill,minmax(min(14rem,100%),1fr));--block-gap:var(--wp--preset--spacing--40)"
-        >
-            <div
-                class="wp-block-group team-card has-accent-3-background-color has-background is-layout-constrained"
-                style="border-radius:12px;padding-top:var(--wp--preset--spacing--30);padding-right:0;padding-bottom:0;padding-left:0;--block-gap:var(--wp--preset--spacing--20)"
-            >
-                <h3 class="wp-block-heading has-text-align-center has-contrast-color has-text-color has-x-large-font-size">
-                    Daire
-                </h3>
-                <p class="has-text-align-center has-accent-2-color has-text-color has-small-font-size">
-                    Team Manager
-                </p>
-                <figure class="wp-block-image size-large has-custom-border">
-                    <Image
-                        src={img0}
-                        alt="Daire, Team Manager"
-                        class="wp-image-176"
-                        style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:12px;border-bottom-right-radius:12px;aspect-ratio:5/6;object-fit:cover"
-                        width={853}
-                        format="webp"
-                        quality={80}
-                    />
-                </figure>
-                <div
-                    class="wp-block-group team-card__back has-accent-3-background-color has-background is-layout-constrained"
-                    style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)"
-                >
-                    <p class="has-text-align-center has-contrast-color has-text-color has-medium-font-size">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Quisque at neque mattis, malesuada velit vel, facilisis
-                        tortor.
-                    </p>
-                </div>
-            </div>
-            <div
-                class="wp-block-group team-card has-accent-3-background-color has-background is-layout-constrained"
-                style="border-radius:12px;padding-top:var(--wp--preset--spacing--30);padding-right:0;padding-bottom:0;padding-left:0;--block-gap:var(--wp--preset--spacing--20)"
-            >
-                <h3 class="wp-block-heading has-text-align-center has-contrast-color has-text-color has-x-large-font-size">
-                    Elio
-                </h3>
-                <p class="has-text-align-center has-accent-2-color has-text-color has-small-font-size">
-                    Electrical Team Lead
-                </p>
-                <figure class="wp-block-image size-large has-custom-border">
-                    <Image
-                        src={img1}
-                        alt="Elio, Electrical Team Lead"
-                        class="wp-image-178"
-                        style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:12px;border-bottom-right-radius:12px;aspect-ratio:5/6;object-fit:cover"
-                        width={811}
-                        format="webp"
-                        quality={80}
-                    />
-                </figure>
-                <div
-                    class="wp-block-group team-card__back has-accent-3-background-color has-background is-layout-constrained"
-                    style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)"
-                >
-                    <p class="has-text-align-center has-contrast-color has-text-color has-medium-font-size">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Quisque at neque mattis, malesuada velit vel, facilisis
-                        tortor.
-                    </p>
-                </div>
-            </div>
-            <div
-                class="wp-block-group team-card has-accent-3-background-color has-background is-layout-constrained"
-                style="border-radius:12px;padding-top:var(--wp--preset--spacing--30);padding-right:0;padding-bottom:0;padding-left:0;--block-gap:var(--wp--preset--spacing--20)"
-            >
-                <h3 class="wp-block-heading has-text-align-center has-contrast-color has-text-color has-x-large-font-size">
-                    Cormac
-                </h3>
-                <p class="has-text-align-center has-accent-2-color has-text-color has-small-font-size">
-                    Dynamics Team Lead
-                </p>
-                <figure class="wp-block-image size-large has-custom-border">
-                    <Image
-                        src={img2}
-                        alt="Cormac, Electrical Team Lead"
-                        class="wp-image-180"
-                        style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:12px;border-bottom-right-radius:12px;aspect-ratio:5/6;object-fit:cover"
-                        width={828}
-                        format="webp"
-                        quality={80}
-                    />
-                </figure>
-                <div
-                    class="wp-block-group team-card__back has-accent-3-background-color has-background is-layout-constrained"
-                    style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)"
-                >
-                    <p class="has-text-align-center has-contrast-color has-text-color has-medium-font-size">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Quisque at neque mattis, malesuada velit vel, facilisis
-                        tortor.
-                    </p>
-                </div>
-            </div>
-            <div
-                class="wp-block-group team-card has-accent-3-background-color has-background is-layout-constrained"
-                style="border-radius:12px;padding-top:var(--wp--preset--spacing--30);padding-right:0;padding-bottom:0;padding-left:0;--block-gap:var(--wp--preset--spacing--20)"
-            >
-                <h3 class="wp-block-heading has-text-align-center has-contrast-color has-text-color has-x-large-font-size">
-                    Daniel
-                </h3>
-                <p class="has-text-align-center has-accent-2-color has-text-color has-small-font-size">
-                    Aero Team Lead
-                </p>
-                <figure class="wp-block-image size-large has-custom-border">
-                    <Image
-                        src={img3}
-                        alt="Elio, Electrical Team Lead"
-                        class="wp-image-182"
-                        style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:12px;border-bottom-right-radius:12px;aspect-ratio:5/6;object-fit:cover"
-                        width={851}
-                        format="webp"
-                        quality={80}
-                    />
-                </figure>
-                <div
-                    class="wp-block-group team-card__back has-accent-3-background-color has-background is-layout-constrained"
-                    style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)"
-                >
-                    <p class="has-text-align-center has-contrast-color has-text-color has-medium-font-size">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Quisque at neque mattis, malesuada velit vel, facilisis
-                        tortor.
-                    </p>
-                </div>
-            </div>
-            <div
-                class="wp-block-group team-card has-accent-3-background-color has-background is-layout-constrained"
-                style="border-radius:12px;padding-top:var(--wp--preset--spacing--30);padding-right:0;padding-bottom:0;padding-left:0;--block-gap:var(--wp--preset--spacing--20)"
-            >
-                <h3 class="wp-block-heading has-text-align-center has-contrast-color has-text-color has-x-large-font-size">
-                    Elio
-                </h3>
-                <p class="has-text-align-center has-accent-2-color has-text-color has-small-font-size">
-                    Electrical Team Lead
-                </p>
-                <figure class="wp-block-image size-large has-custom-border">
-                    <Image
-                        src={img4}
-                        alt="Elio, Electrical Team Lead"
-                        class="wp-image-188"
-                        style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:12px;border-bottom-right-radius:12px;aspect-ratio:5/6;object-fit:cover"
-                        width={866}
-                        format="webp"
-                        quality={80}
-                    />
-                </figure>
-                <div
-                    class="wp-block-group team-card__back has-accent-3-background-color has-background is-layout-constrained"
-                    style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)"
-                >
-                    <p class="has-text-align-center has-contrast-color has-text-color has-medium-font-size">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Quisque at neque mattis, malesuada velit vel, facilisis
-                        tortor.
-                    </p>
-                </div>
-            </div>
-            <div
-                class="wp-block-group team-card has-accent-3-background-color has-background is-layout-constrained"
-                style="border-radius:12px;padding-top:var(--wp--preset--spacing--30);padding-right:0;padding-bottom:0;padding-left:0;--block-gap:var(--wp--preset--spacing--20)"
-            >
-                <h3 class="wp-block-heading has-text-align-center has-contrast-color has-text-color has-x-large-font-size">
-                    Elio
-                </h3>
-                <p class="has-text-align-center has-accent-2-color has-text-color has-small-font-size">
-                    Electrical Team Lead
-                </p>
-                <figure class="wp-block-image size-large has-custom-border">
-                    <Image
-                        src={img5}
-                        alt="Elio, Electrical Team Lead"
-                        class="wp-image-184"
-                        style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:12px;border-bottom-right-radius:12px;aspect-ratio:5/6;object-fit:cover"
-                        width={920}
-                        format="webp"
-                        quality={80}
-                    />
-                </figure>
-                <div
-                    class="wp-block-group team-card__back has-accent-3-background-color has-background is-layout-constrained"
-                    style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)"
-                >
-                    <p class="has-text-align-center has-contrast-color has-text-color has-medium-font-size">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Quisque at neque mattis, malesuada velit vel, facilisis
-                        tortor.
-                    </p>
-                </div>
-            </div>
-            <div
-                class="wp-block-group team-card has-accent-3-background-color has-background is-layout-constrained"
-                style="border-radius:12px;padding-top:var(--wp--preset--spacing--30);padding-right:0;padding-bottom:0;padding-left:0;--block-gap:var(--wp--preset--spacing--20)"
-            >
-                <h3 class="wp-block-heading has-text-align-center has-contrast-color has-text-color has-x-large-font-size">
-                    JJ
-                </h3>
-                <p class="has-text-align-center has-accent-2-color has-text-color has-small-font-size">
-                    Electrical Team Lead
-                </p>
-                <figure class="wp-block-image size-large has-custom-border">
-                    <Image
-                        src={img6}
-                        alt="Elio, Electrical Team Lead"
-                        class="wp-image-186"
-                        style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:12px;border-bottom-right-radius:12px;aspect-ratio:5/6;object-fit:cover"
-                        width={896}
-                        format="webp"
-                        quality={80}
-                    />
-                </figure>
-                <div
-                    class="wp-block-group team-card__back has-accent-3-background-color has-background is-layout-constrained"
-                    style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)"
-                >
-                    <p class="has-text-align-center has-contrast-color has-text-color has-medium-font-size">
-                        I’m a fifth-year MSc Mechanical Engineering student, and
-                        this is my second year on the team. Most of my days are
-                        spent working towards a competitive Formula Student car
-                        to bring to Silverstone in July!
-                    </p>
-                </div>
-            </div>
-            <div
-                class="wp-block-group team-card has-accent-3-background-color has-background is-layout-constrained"
-                style="border-radius:12px;padding-top:var(--wp--preset--spacing--30);padding-right:0;padding-bottom:0;padding-left:0;--block-gap:var(--wp--preset--spacing--20)"
-            >
-                <h3 class="wp-block-heading has-text-align-center has-contrast-color has-text-color has-x-large-font-size">
-                    Elio
-                </h3>
-                <p class="has-text-align-center has-accent-2-color has-text-color has-small-font-size">
-                    Electrical Team Lead
-                </p>
-                <figure class="wp-block-image size-large has-custom-border">
-                    <Image
-                        src={img7}
-                        alt="Elio, Electrical Team Lead"
-                        class="wp-image-190"
-                        style="border-top-left-radius:0px;border-top-right-radius:0px;border-bottom-left-radius:12px;border-bottom-right-radius:12px;aspect-ratio:5/6;object-fit:cover"
-                        width={918}
-                        format="webp"
-                        quality={80}
-                    />
-                </figure>
-                <div
-                    class="wp-block-group team-card__back has-accent-3-background-color has-background is-layout-constrained"
-                    style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)"
-                >
-                    <p class="has-text-align-center has-contrast-color has-text-color has-medium-font-size">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Quisque at neque mattis, malesuada velit vel, facilisis
-                        tortor.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
+<Layout
+    title="Meet the Team"
+    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel."
+>
+    <Band bg="accent-2">
+        <h1>Meet our Team</h1>
+        <CardGrid min={14}>
+            {team.map((member) => (
+                <TeamCard name={member.name} role={member.role} photo={member.photo}>
+                    {member.bio}
+                </TeamCard>
+            ))}
+        </CardGrid>
+    </Band>
 </Layout>
+
+<style>
+    h1 {
+        font-size: 5rem;
+        color: var(--wp--preset--color--contrast);
+        text-align: left;
+    }
+</style>

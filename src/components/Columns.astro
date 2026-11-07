@@ -1,0 +1,17 @@
+---
+// Equal-width columns that stack on small screens. Fill with <Stat> or <Step>.
+---
+
+<div class="columns"><slot /></div>
+
+<style>
+    .columns {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: var(--block-gap, 2em);
+    }
+    @media (max-width: 781px) {
+        .columns { flex-wrap: wrap; }
+        .columns > :global(*) { flex-basis: 100% !important; }
+    }
+</style>

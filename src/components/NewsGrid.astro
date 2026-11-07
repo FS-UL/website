@@ -1,33 +1,35 @@
 ---
-import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 import { base } from '../consts';
 import PostMeta from './PostMeta.astro';
+import { postExcerpt } from '../lib/posts';
 
-// Replaces the WordPress "News Posts" query block: newest first, 9 per page.
-const posts = (await getCollection('posts')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 9);
+// Replaces the WordPress "News Posts" query block. The newsroom page passes in the (already sorted, paginated) posts.
+interface Props { posts: CollectionEntry<'posts'>[] }
+const { posts } = Astro.props;
 
-function excerpt(entry: (typeof posts)[number]) {
-  if (entry.data.excerpt) return entry.data.excerpt;
-  const words = (entry.body ?? '')
-    .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
-    .replace(/^#+\s*/gm, '')
-    .replace(/[*_`]/g, '')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .split(' ');
-  return words.slice(0, 25).join(' ') + (words.length > 25 ? '…' : '');
-}
 ---
-<div class="wp-block-query">
-  <div class="wp-block-post-template is-layout-grid" style="--block-gap:var(--wp--preset--spacing--40);grid-template-columns:repeat(auto-fill,minmax(min(18rem,100%),1fr))">
-    {posts.map((post) => (
-      <div class="wp-block-group has-accent-5-background-color has-background news-card is-layout-constrained">
-        <div class="news-card__body">
-          <PostMeta date={post.data.date} author={post.data.author} />
-          <h3 class="wp-block-heading has-contrast-color has-text-color has-large-font-size"><a href={`${base}/${post.id}/`}>{post.data.title}</a></h3>
-          <p class="has-contrast-color has-text-color has-small-font-size">{excerpt(post)}</p>
-        </div>
+<div class="news-grid">
+  {posts.map((post) => (
+    <div class="news-card">
+      <div class="news-card__body">
+        <PostMeta date={post.data.date} author={post.data.author} />
+        <h3><a href={`${base}/${post.id}/`}>{post.data.title}</a></h3>
+        <p>{postExcerpt(post)}</p>
       </div>
-    ))}
-  </div>
+    </div>
+  ))}
 </div>
+
+<style>
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(18rem, 100%), 1fr));
+    gap: var(--wp--preset--spacing--40);
+    max-width: var(--wide-size);
+    margin-inline: auto;
+  }
+  .news-card { background-color: var(--wp--preset--color--accent-5); }
+  h3 { color: var(--wp--preset--color--contrast); }
+  p { color: var(--wp--preset--color--contrast); font-size: var(--wp--preset--font-size--small); }
+</style>

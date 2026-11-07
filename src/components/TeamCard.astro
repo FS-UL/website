@@ -1,0 +1,66 @@
+---
+// A team member card. The front shows name, role and photo; the back (a short bio) is revealed by
+// the flip behaviour in src/scripts/flip-cards.js and src/styles/flip-cards.css, which key off the
+// `team-card` and `team-card__back` classes.
+import { Image } from "astro:assets";
+
+interface Props {
+    name: string;
+    role: string;
+    photo: ImageMetadata;
+}
+const { name, role, photo } = Astro.props;
+---
+
+<div class="team-card">
+    <h3>{name}</h3>
+    <p class="role">{role}</p>
+    <figure>
+        <Image
+            src={photo}
+            alt={`${name}, ${role}`}
+            width={photo.width}
+            format="webp"
+            quality={80}
+        />
+    </figure>
+    <div class="team-card__back">
+        <p><slot /></p>
+    </div>
+</div>
+
+<style>
+    .team-card {
+        border-radius: 12px;
+        padding-top: var(--wp--preset--spacing--30);
+        background-color: var(--wp--preset--color--accent-3);
+    }
+    h3 {
+        text-align: center;
+        font-size: var(--wp--preset--font-size--x-large);
+        color: var(--wp--preset--color--contrast);
+    }
+    .role {
+        text-align: center;
+        font-size: var(--wp--preset--font-size--small);
+        color: var(--wp--preset--color--accent-2);
+    }
+    img {
+        display: block;
+        border-radius: 0 0 12px 12px;
+        aspect-ratio: 5 / 6;
+        object-fit: cover;
+        vertical-align: bottom;
+        max-width: 100%;
+        height: auto;
+    }
+    .team-card__back {
+        border-radius: 12px;
+        padding: var(--wp--preset--spacing--40);
+        background-color: var(--wp--preset--color--accent-3);
+    }
+    .team-card__back p {
+        text-align: center;
+        color: var(--wp--preset--color--contrast);
+    }
+</style>

@@ -5,6 +5,10 @@ export const SITE_DESCRIPTION =
 // BASE_URL is "/" locally and "/<repo>/" on GitHub Pages; strip the trailing slash so we can write `${base}/path/`.
 export const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
+// Google Form that sponsor enquiries are sent to.
+export const SPONSOR_FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSeSaSpfMyGhvWRcTTap6KeJwXJt8gR4y65CD4KNei2xUTt0bA/viewform';
+
 export const nav = [
   { label: 'Our Partners', href: '/ourpartners/' },
   { label: 'Newsroom', href: '/newsroom/' },

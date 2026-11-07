@@ -1,0 +1,56 @@
+---
+interface Props {
+    href: string;
+    variant?: "solid" | "outline";
+    /** Text colour of a solid button. */
+    textColor?: "base" | "accent-1";
+    /** Opens in a new tab (for links to other sites). */
+    external?: boolean;
+}
+const { href, variant = "solid", textColor = "base", external = false } = Astro.props;
+---
+
+<a {href} target={external ? "_blank" : undefined} rel={external ? "noopener" : undefined} class:list={["button", `button--${variant}`, `button--text-${textColor}`]}><slot />{external && <span class="visually-hidden"> (opens in a new tab)</span>}</a>
+
+<style>
+    .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+    .button {
+        display: inline-block;
+        box-sizing: border-box;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        font-family: var(--wp--preset--font-family--orbitron);
+        font-weight: 700;
+        font-style: normal;
+        font-size: var(--wp--preset--font-size--medium);
+        padding: 0.6rem 1.6rem;
+        border-radius: 0.33rem;
+        transition: opacity 0.2s;
+    }
+    .button:hover { opacity: 0.85; }
+    .button:focus-visible { outline: 2px solid var(--wp--preset--color--accent-4); outline-offset: 2px; }
+    .button--solid {
+        background-color: var(--wp--preset--color--accent-2);
+        border: 0;
+    }
+    .button--text-base { color: var(--wp--preset--color--base); }
+    .button--text-accent-1 { color: var(--wp--preset--color--accent-1); }
+    .button--outline {
+        background: transparent;
+        color: var(--wp--preset--color--contrast);
+        border: 1px solid currentColor;
+        padding: calc(0.6rem - 1px) calc(1.6rem - 1px);
+    }
+    .button--outline:hover {
+        background: color-mix(in srgb, var(--wp--preset--color--contrast) 5%, transparent);
+        opacity: 1;
+    }
+</style>

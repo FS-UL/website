@@ -1,14 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Band from "../components/Band.astro";
 import { base } from "../consts";
 ---
 
 <Layout title="Page not found" noindex>
-    <div
-        class="wp-block-group alignfull is-layout-constrained"
-        style="padding:var(--wp--preset--spacing--60) var(--wp--preset--spacing--50);text-align:center"
-    >
-        <h1 class="wp-block-heading">404</h1>
+    <Band size={800}>
+        <h1>404</h1>
         <p>
             Looks like this lap ended in the gravel. The page you're after
             doesn't exist or has moved.
@@ -17,5 +15,9 @@ import { base } from "../consts";
             <a href={`${base}/`}>Back to the homepage</a> ·{" "}
             <a href={`${base}/newsroom/`}>Newsroom</a>
         </p>
-    </div>
+    </Band>
 </Layout>
+
+<style>
+    h1, p { text-align: center; }
+</style>

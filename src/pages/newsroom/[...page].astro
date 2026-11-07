@@ -1,0 +1,58 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getSortedPosts } from '../../lib/posts';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Band from '../../components/Band.astro';
+import CtaCover from '../../components/CtaCover.astro';
+import Buttons from '../../components/Buttons.astro';
+import Button from '../../components/Button.astro';
+import NewsGrid from '../../components/NewsGrid.astro';
+import { base } from '../../consts';
+
+// 9 posts per page, newest first: /newsroom/, /newsroom/2/, ...
+export const getStaticPaths = (async ({ paginate }) => {
+  return paginate(await getSortedPosts(), { pageSize: 9 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+const origin = (u?: string) => (u ? new URL(u, Astro.site).href : undefined);
+---
+<Layout
+  title={page.currentPage > 1 ? `Newsroom - Page ${page.currentPage}` : 'Newsroom'}
+  description="Race updates, build progress and stories from Formula Student UL, all in one place."
+  prev={origin(page.url.prev)}
+  next={origin(page.url.next)}
+>
+  <PageHero title="Newsroom" />
+
+  <Band bg="accent-5" pad={50} gap="var(--wp--preset--spacing--30)">
+    <h2 class="section-title section-title--accent">Latest from the team</h2>
+    <p>Race updates, build progress and stories from Formula Student UL, all in one place.</p>
+  </Band>
+
+  <Band bg="base">
+    <NewsGrid posts={page.data} />
+    {(page.url.prev || page.url.next) && (
+      <nav class="pagination" aria-label="Newsroom pages">
+        {page.url.prev ? <a href={page.url.prev} rel="prev">← Newer posts</a> : <span />}
+        <span>Page {page.currentPage} of {page.lastPage}</span>
+        {page.url.next ? <a href={page.url.next} rel="next">Older posts →</a> : <span />}
+      </nav>
+    )}
+  </Band>
+
+  <CtaCover
+    title="Follow the build"
+    text="Behind-the-scenes updates, workshop photos and race-day moments, straight from the team."
+  >
+    <Buttons>
+      <Button href="https://www.instagram.com/formulastudentul/">Follow on Instagram</Button>
+      <Button href={`${base}/ourpartners/`} variant="outline">Back the team</Button>
+    </Buttons>
+  </CtaCover>
+</Layout>
+
+<style>
+  .pagination { display: flex; justify-content: space-between; margin-top: var(--wp--preset--spacing--40); }
+</style>

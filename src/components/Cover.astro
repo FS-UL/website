@@ -1,0 +1,85 @@
+---
+// Full-width image banner with a dark tint and a content area on top.
+// Replaces the old WordPress "wp-block-cover" markup.
+import { Image } from "astro:assets";
+import defaultImage from "../assets/team-silverstone.png";
+
+interface Props {
+    minHeight: number;
+    /** Colour laid over the image at 80% opacity. */
+    tint?: "base" | "accent-3";
+    /** Adds the page-edge padding on the left/right. */
+    inset?: boolean;
+    eager?: boolean;
+    image?: ImageMetadata;
+}
+const {
+    minHeight,
+    tint = "base",
+    inset = false,
+    eager = false,
+    image = defaultImage,
+} = Astro.props;
+---
+
+<div class:list={["cover", { "cover--inset": inset }]} style={`min-height:${minHeight}px`}>
+    <Image
+        src={image}
+        alt=""
+        class="cover__image"
+        width={1920}
+        format="webp"
+        quality={80}
+        loading={eager ? "eager" : "lazy"}
+    />
+    <span class:list={["cover__tint", `cover__tint--${tint}`]} aria-hidden="true"></span>
+    <div class="cover__inner"><slot /></div>
+</div>
+
+<style>
+    .cover {
+        position: relative;
+        isolation: isolate;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1em;
+        overflow: hidden;
+        box-sizing: border-box;
+        width: 100%;
+    }
+    .cover--inset {
+        padding-inline: var(--wp--preset--spacing--50);
+    }
+    .cover__image {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 60%;
+        margin: 0;
+        z-index: -1;
+    }
+    .cover__tint {
+        position: absolute;
+        inset: 0;
+        opacity: 0.8;
+        z-index: 0;
+    }
+    .cover__tint--base { background-color: var(--wp--preset--color--base); }
+    .cover__tint--accent-3 { background-color: var(--wp--preset--color--accent-3); }
+    .cover__inner {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+    }
+    /* Slotted children belong to the page, so they are targeted with :global. */
+    .cover__inner > :global(*) {
+        max-width: var(--wide-size);
+        margin-inline: auto;
+    }
+    .cover__inner > :global(* + *) {
+        margin-block-start: var(--block-gap);
+    }
+</style>

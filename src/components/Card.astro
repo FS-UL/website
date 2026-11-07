@@ -1,0 +1,31 @@
+---
+import Eyebrow from "./Eyebrow.astro";
+
+interface Props {
+    title: string;
+    /** Small label above the title, e.g. "01". */
+    eyebrow?: string;
+    /** Adds a link line under the text (defaults to "Read more →"). */
+    href?: string;
+    linkText?: string;
+}
+const { title, eyebrow, href, linkText = "Read more →" } = Astro.props;
+---
+
+<div class="card">
+    {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+    <h3>{title}</h3>
+    <div class="card__text"><slot /></div>
+    {href && <p class="card__link"><a {href}>{linkText}</a></p>}
+</div>
+
+<style>
+    .card {
+        border-radius: 12px;
+        padding: var(--wp--preset--spacing--40);
+        color: var(--wp--preset--color--contrast);
+        background-color: var(--wp--preset--color--accent-5);
+    }
+    h3 { color: var(--wp--preset--color--contrast); }
+    .card__link { font-weight: 700; }
+</style>

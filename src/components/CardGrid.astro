@@ -1,0 +1,20 @@
+---
+// Responsive grid for <Card>s (and similar tiles).
+interface Props {
+    /** Minimum column width in rem. */
+    min?: number;
+}
+const { min = 16 } = Astro.props;
+---
+
+<div class="card-grid" style={`--min:${min}rem`}><slot /></div>
+
+<style>
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(var(--min), 100%), 1fr));
+        /* also read by the band's spacing rule, so the grid sits this far below the heading */
+        --block-gap: var(--wp--preset--spacing--40);
+        gap: var(--block-gap);
+    }
+</style>
