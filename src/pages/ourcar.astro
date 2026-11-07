@@ -1,73 +1,310 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
-import { base } from '../consts';
-import img0 from '../assets/team-silverstone.png';
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { base } from "../consts";
+import img0 from "../assets/team-silverstone.png";
 ---
+
 <Layout title="Our Car">
-<div class="wp-block-cover alignfull" style="min-height:480px"><Image src={img0} alt="" class="wp-block-cover__image-background wp-image-80 size-full" style="object-position:50% 60%" width={1920} format="webp" quality={80} loading="lazy" /><span aria-hidden="true" class="wp-block-cover__background has-base-background-color has-background-dim-80 has-background-dim"></span><div class="wp-block-cover__inner-container"><h1 class="wp-block-heading has-text-align-left alignwide has-contrast-color has-text-color has-link-color" style="font-size:5rem">Our Car</h1>
-<h2 class="wp-block-heading has-text-align-left alignwide has-accent-2-color has-text-color has-xx-large-font-size">Built in Limerick</h2>
-<p class="has-text-align-left alignwide has-contrast-color has-text-color has-medium-font-size">Every part of our car is designed, built and tested by students at the University of Limerick.</p>
-</div></div>
-<div class="wp-block-group alignfull has-base-background-color has-background is-layout-constrained" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--50);--content-size:1200px"><h2 class="wp-block-heading has-contrast-color has-text-color has-xx-large-font-size">The Numbers</h2>
-<div class="wp-block-columns alignwide is-layout-flex"><div class="wp-block-column"><h3 class="wp-block-heading has-accent-2-color has-text-color has-xxx-large-font-size">000</h3>
-<p class="has-contrast-color has-text-color has-orbitron-font-family has-small-font-size" style="letter-spacing:2px;text-transform:uppercase">Power (kW)</p>
-</div>
-<div class="wp-block-column"><h3 class="wp-block-heading has-accent-2-color has-text-color has-xxx-large-font-size">000</h3>
-<p class="has-contrast-color has-text-color has-orbitron-font-family has-small-font-size" style="letter-spacing:2px;text-transform:uppercase">Weight (kg)</p>
-</div>
-<div class="wp-block-column"><h3 class="wp-block-heading has-accent-2-color has-text-color has-xxx-large-font-size">0.0s</h3>
-<p class="has-contrast-color has-text-color has-orbitron-font-family has-small-font-size" style="letter-spacing:2px;text-transform:uppercase">0 to 100 km/h</p>
-</div>
-</div>
-</div>
-<div class="wp-block-group alignfull has-accent-3-background-color has-background is-layout-constrained" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--50);--content-size:1200px"><h2 class="wp-block-heading has-contrast-color has-text-color has-xx-large-font-size">Six systems, one car</h2>
-<div class="wp-block-group is-layout-grid" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;grid-template-columns:repeat(auto-fill,minmax(min(16rem,100%),1fr));--block-gap:var(--wp--preset--spacing--40)"><div class="wp-block-group has-contrast-color has-accent-5-background-color has-text-color has-background is-layout-constrained" style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40);--block-gap:var(--wp--preset--spacing--20)"><p class="has-accent-2-color has-text-color has-orbitron-font-family has-small-font-size" style="font-style:normal;font-weight:700;letter-spacing:2px;text-transform:uppercase">01</p>
-<h3 class="wp-block-heading has-contrast-color has-text-color">Powertrain</h3>
-<p class="has-contrast-color has-text-color">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor.</p>
-</div>
-<div class="wp-block-group has-contrast-color has-accent-5-background-color has-text-color has-background is-layout-constrained" style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40);--block-gap:var(--wp--preset--spacing--20)"><p class="has-accent-2-color has-text-color has-orbitron-font-family has-small-font-size" style="font-style:normal;font-weight:700;letter-spacing:2px;text-transform:uppercase">02</p>
-<h3 class="wp-block-heading has-contrast-color has-text-color">Chassis</h3>
-<p class="has-contrast-color has-text-color">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor.</p>
-</div>
-<div class="wp-block-group has-contrast-color has-accent-5-background-color has-text-color has-background is-layout-constrained" style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40);--block-gap:var(--wp--preset--spacing--20)"><p class="has-accent-2-color has-text-color has-orbitron-font-family has-small-font-size" style="font-style:normal;font-weight:700;letter-spacing:2px;text-transform:uppercase">03</p>
-<h3 class="wp-block-heading has-contrast-color has-text-color">Aerodynamics</h3>
-<p class="has-contrast-color has-text-color">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor.</p>
-</div>
-<div class="wp-block-group has-contrast-color has-accent-5-background-color has-text-color has-background is-layout-constrained" style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40);--block-gap:var(--wp--preset--spacing--20)"><p class="has-accent-2-color has-text-color has-orbitron-font-family has-small-font-size" style="font-style:normal;font-weight:700;letter-spacing:2px;text-transform:uppercase">04</p>
-<h3 class="wp-block-heading has-contrast-color has-text-color">Suspension</h3>
-<p class="has-contrast-color has-text-color">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor.</p>
-</div>
-<div class="wp-block-group has-contrast-color has-accent-5-background-color has-text-color has-background is-layout-constrained" style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40);--block-gap:var(--wp--preset--spacing--20)"><p class="has-accent-2-color has-text-color has-orbitron-font-family has-small-font-size" style="font-style:normal;font-weight:700;letter-spacing:2px;text-transform:uppercase">05</p>
-<h3 class="wp-block-heading has-contrast-color has-text-color">Electronics</h3>
-<p class="has-contrast-color has-text-color">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor.</p>
-</div>
-<div class="wp-block-group has-contrast-color has-accent-5-background-color has-text-color has-background is-layout-constrained" style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40);--block-gap:var(--wp--preset--spacing--20)"><p class="has-accent-2-color has-text-color has-orbitron-font-family has-small-font-size" style="font-style:normal;font-weight:700;letter-spacing:2px;text-transform:uppercase">06</p>
-<h3 class="wp-block-heading has-contrast-color has-text-color">Brakes</h3>
-<p class="has-contrast-color has-text-color">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor.</p>
-</div>
-</div>
-</div>
-<div class="wp-block-group alignfull has-base-background-color has-background is-layout-constrained" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--50);--content-size:1200px"><p class="has-accent-2-color has-text-color has-orbitron-font-family has-small-font-size" style="font-style:normal;font-weight:700;letter-spacing:2px;text-transform:uppercase">How it comes together</p>
-<h2 class="wp-block-heading has-contrast-color has-text-color has-xx-large-font-size">From sketch to start line</h2>
-<div class="wp-block-columns alignwide is-layout-flex"><div class="wp-block-column"><h3 class="wp-block-heading has-accent-2-color has-text-color has-xxx-large-font-size">01</h3>
-<h4 class="wp-block-heading has-contrast-color has-text-color">Design</h4>
-<p class="has-contrast-color has-text-color has-small-font-size">Concepts, simulation and analysis turn into a full CAD model of the car.</p>
-</div>
-<div class="wp-block-column"><h3 class="wp-block-heading has-accent-2-color has-text-color has-xxx-large-font-size">02</h3>
-<h4 class="wp-block-heading has-contrast-color has-text-color">Build</h4>
-<p class="has-contrast-color has-text-color has-small-font-size">Parts are manufactured and assembled by the team in the workshop.</p>
-</div>
-<div class="wp-block-column"><h3 class="wp-block-heading has-accent-2-color has-text-color has-xxx-large-font-size">03</h3>
-<h4 class="wp-block-heading has-contrast-color has-text-color">Test &amp; race</h4>
-<p class="has-contrast-color has-text-color has-small-font-size">Shakedown, tuning and then competition against universities from around the world.</p>
-</div>
-</div>
-</div>
-<div class="wp-block-cover alignfull is-dark" style="padding-right:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50);min-height:360px"><Image src={img0} alt="" class="wp-block-cover__image-background wp-image-80" style="object-position:50% 60%" width={1920} format="webp" quality={80} loading="lazy" /><span aria-hidden="true" class="wp-block-cover__background has-base-background-color has-background-dim-80 has-background-dim"></span><div class="wp-block-cover__inner-container"><h2 class="wp-block-heading alignwide has-contrast-color has-text-color has-xx-large-font-size">Want to know who builds it?</h2>
-<p class="has-contrast-color has-text-color has-large-font-size">Behind every lap is a team of students from the University of Limerick, supported by our partners.</p>
-<div class="wp-block-buttons is-layout-flex" style="flex-wrap:wrap"><div class="wp-block-button"><a class="wp-block-button__link has-base-color has-accent-2-background-color has-text-color has-background wp-element-button" href={`${base}/meettheteam/`} style="font-style:normal;font-weight:700">Meet the team</a></div>
-<div class="wp-block-button is-style-outline"><a class="wp-block-button__link has-contrast-color has-text-color wp-element-button" href={`${base}/ourpartners/`} style="font-style:normal;font-weight:700">Our partners</a></div>
-</div>
-</div></div>
+    <div class="wp-block-cover alignfull" style="min-height:480px">
+        <Image
+            src={img0}
+            alt=""
+            class="wp-block-cover__image-background wp-image-80 size-full"
+            style="object-position:50% 60%"
+            width={1920}
+            format="webp"
+            quality={80}
+            loading="lazy"
+        />
+        <span
+            aria-hidden="true"
+            class="wp-block-cover__background has-base-background-color has-background-dim-80 has-background-dim"
+        ></span>
+        <div class="wp-block-cover__inner-container">
+            <h1
+                class="wp-block-heading has-text-align-left alignwide has-contrast-color has-text-color has-link-color"
+                style="font-size:5rem"
+            >
+                Our Car
+            </h1>
+            <h2 class="wp-block-heading has-text-align-left alignwide has-accent-2-color has-text-color has-xx-large-font-size">
+                Built in Limerick
+            </h2>
+            <p class="has-text-align-left alignwide has-contrast-color has-text-color has-medium-font-size">
+                Every part of our car is designed, built and tested by students
+                at the University of Limerick.
+            </p>
+        </div>
+    </div>
+    <div
+        class="wp-block-group alignfull has-base-background-color has-background is-layout-constrained"
+        style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--50);--content-size:1200px"
+    >
+        <h2 class="wp-block-heading has-contrast-color has-text-color has-xx-large-font-size">
+            The Numbers
+        </h2>
+        <div class="wp-block-columns alignwide is-layout-flex">
+            <div class="wp-block-column">
+                <h3 class="wp-block-heading has-accent-2-color has-text-color has-xxx-large-font-size">
+                    000
+                </h3>
+                <p
+                    class="has-contrast-color has-text-color has-orbitron-font-family has-small-font-size"
+                    style="letter-spacing:2px;text-transform:uppercase"
+                >
+                    Power (kW)
+                </p>
+            </div>
+            <div class="wp-block-column">
+                <h3 class="wp-block-heading has-accent-2-color has-text-color has-xxx-large-font-size">
+                    000
+                </h3>
+                <p
+                    class="has-contrast-color has-text-color has-orbitron-font-family has-small-font-size"
+                    style="letter-spacing:2px;text-transform:uppercase"
+                >
+                    Weight (kg)
+                </p>
+            </div>
+            <div class="wp-block-column">
+                <h3 class="wp-block-heading has-accent-2-color has-text-color has-xxx-large-font-size">
+                    0.0s
+                </h3>
+                <p
+                    class="has-contrast-color has-text-color has-orbitron-font-family has-small-font-size"
+                    style="letter-spacing:2px;text-transform:uppercase"
+                >
+                    0 to 100 km/h
+                </p>
+            </div>
+        </div>
+    </div>
+    <div
+        class="wp-block-group alignfull has-accent-3-background-color has-background is-layout-constrained"
+        style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--50);--content-size:1200px"
+    >
+        <h2 class="wp-block-heading has-contrast-color has-text-color has-xx-large-font-size">
+            Six systems, one car
+        </h2>
+        <div
+            class="wp-block-group is-layout-grid"
+            style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0;grid-template-columns:repeat(auto-fill,minmax(min(16rem,100%),1fr));--block-gap:var(--wp--preset--spacing--40)"
+        >
+            <div
+                class="wp-block-group has-contrast-color has-accent-5-background-color has-text-color has-background is-layout-constrained"
+                style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40);--block-gap:var(--wp--preset--spacing--20)"
+            >
+                <p
+                    class="has-accent-2-color has-text-color has-orbitron-font-family has-small-font-size"
+                    style="font-style:normal;font-weight:700;letter-spacing:2px;text-transform:uppercase"
+                >
+                    01
+                </p>
+                <h3 class="wp-block-heading has-contrast-color has-text-color">
+                    Powertrain
+                </h3>
+                <p class="has-contrast-color has-text-color">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Quisque at neque mattis, malesuada velit vel, facilisis
+                    tortor.
+                </p>
+            </div>
+            <div
+                class="wp-block-group has-contrast-color has-accent-5-background-color has-text-color has-background is-layout-constrained"
+                style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40);--block-gap:var(--wp--preset--spacing--20)"
+            >
+                <p
+                    class="has-accent-2-color has-text-color has-orbitron-font-family has-small-font-size"
+                    style="font-style:normal;font-weight:700;letter-spacing:2px;text-transform:uppercase"
+                >
+                    02
+                </p>
+                <h3 class="wp-block-heading has-contrast-color has-text-color">
+                    Chassis
+                </h3>
+                <p class="has-contrast-color has-text-color">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Quisque at neque mattis, malesuada velit vel, facilisis
+                    tortor.
+                </p>
+            </div>
+            <div
+                class="wp-block-group has-contrast-color has-accent-5-background-color has-text-color has-background is-layout-constrained"
+                style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40);--block-gap:var(--wp--preset--spacing--20)"
+            >
+                <p
+                    class="has-accent-2-color has-text-color has-orbitron-font-family has-small-font-size"
+                    style="font-style:normal;font-weight:700;letter-spacing:2px;text-transform:uppercase"
+                >
+                    03
+                </p>
+                <h3 class="wp-block-heading has-contrast-color has-text-color">
+                    Aerodynamics
+                </h3>
+                <p class="has-contrast-color has-text-color">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Quisque at neque mattis, malesuada velit vel, facilisis
+                    tortor.
+                </p>
+            </div>
+            <div
+                class="wp-block-group has-contrast-color has-accent-5-background-color has-text-color has-background is-layout-constrained"
+                style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40);--block-gap:var(--wp--preset--spacing--20)"
+            >
+                <p
+                    class="has-accent-2-color has-text-color has-orbitron-font-family has-small-font-size"
+                    style="font-style:normal;font-weight:700;letter-spacing:2px;text-transform:uppercase"
+                >
+                    04
+                </p>
+                <h3 class="wp-block-heading has-contrast-color has-text-color">
+                    Suspension
+                </h3>
+                <p class="has-contrast-color has-text-color">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Quisque at neque mattis, malesuada velit vel, facilisis
+                    tortor.
+                </p>
+            </div>
+            <div
+                class="wp-block-group has-contrast-color has-accent-5-background-color has-text-color has-background is-layout-constrained"
+                style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40);--block-gap:var(--wp--preset--spacing--20)"
+            >
+                <p
+                    class="has-accent-2-color has-text-color has-orbitron-font-family has-small-font-size"
+                    style="font-style:normal;font-weight:700;letter-spacing:2px;text-transform:uppercase"
+                >
+                    05
+                </p>
+                <h3 class="wp-block-heading has-contrast-color has-text-color">
+                    Electronics
+                </h3>
+                <p class="has-contrast-color has-text-color">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Quisque at neque mattis, malesuada velit vel, facilisis
+                    tortor.
+                </p>
+            </div>
+            <div
+                class="wp-block-group has-contrast-color has-accent-5-background-color has-text-color has-background is-layout-constrained"
+                style="border-radius:12px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40);--block-gap:var(--wp--preset--spacing--20)"
+            >
+                <p
+                    class="has-accent-2-color has-text-color has-orbitron-font-family has-small-font-size"
+                    style="font-style:normal;font-weight:700;letter-spacing:2px;text-transform:uppercase"
+                >
+                    06
+                </p>
+                <h3 class="wp-block-heading has-contrast-color has-text-color">
+                    Brakes
+                </h3>
+                <p class="has-contrast-color has-text-color">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Quisque at neque mattis, malesuada velit vel, facilisis
+                    tortor.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div
+        class="wp-block-group alignfull has-base-background-color has-background is-layout-constrained"
+        style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--50);--content-size:1200px"
+    >
+        <p
+            class="has-accent-2-color has-text-color has-orbitron-font-family has-small-font-size"
+            style="font-style:normal;font-weight:700;letter-spacing:2px;text-transform:uppercase"
+        >
+            How it comes together
+        </p>
+        <h2 class="wp-block-heading has-contrast-color has-text-color has-xx-large-font-size">
+            From sketch to start line
+        </h2>
+        <div class="wp-block-columns alignwide is-layout-flex">
+            <div class="wp-block-column">
+                <h3 class="wp-block-heading has-accent-2-color has-text-color has-xxx-large-font-size">
+                    01
+                </h3>
+                <h4 class="wp-block-heading has-contrast-color has-text-color">
+                    Design
+                </h4>
+                <p class="has-contrast-color has-text-color has-small-font-size">
+                    Concepts, simulation and analysis turn into a full CAD model
+                    of the car.
+                </p>
+            </div>
+            <div class="wp-block-column">
+                <h3 class="wp-block-heading has-accent-2-color has-text-color has-xxx-large-font-size">
+                    02
+                </h3>
+                <h4 class="wp-block-heading has-contrast-color has-text-color">
+                    Build
+                </h4>
+                <p class="has-contrast-color has-text-color has-small-font-size">
+                    Parts are manufactured and assembled by the team in the
+                    workshop.
+                </p>
+            </div>
+            <div class="wp-block-column">
+                <h3 class="wp-block-heading has-accent-2-color has-text-color has-xxx-large-font-size">
+                    03
+                </h3>
+                <h4 class="wp-block-heading has-contrast-color has-text-color">
+                    Test &amp; race
+                </h4>
+                <p class="has-contrast-color has-text-color has-small-font-size">
+                    Shakedown, tuning and then competition against universities
+                    from around the world.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div
+        class="wp-block-cover alignfull is-dark"
+        style="padding-right:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50);min-height:360px"
+    >
+        <Image
+            src={img0}
+            alt=""
+            class="wp-block-cover__image-background wp-image-80"
+            style="object-position:50% 60%"
+            width={1920}
+            format="webp"
+            quality={80}
+            loading="lazy"
+        />
+        <span
+            aria-hidden="true"
+            class="wp-block-cover__background has-base-background-color has-background-dim-80 has-background-dim"
+        ></span>
+        <div class="wp-block-cover__inner-container">
+            <h2 class="wp-block-heading alignwide has-contrast-color has-text-color has-xx-large-font-size">
+                Want to know who builds it?
+            </h2>
+            <p class="has-contrast-color has-text-color has-large-font-size">
+                Behind every lap is a team of students from the University of
+                Limerick, supported by our partners.
+            </p>
+            <div class="wp-block-buttons is-layout-flex" style="flex-wrap:wrap">
+                <div class="wp-block-button">
+                    <a
+                        class="wp-block-button__link has-base-color has-accent-2-background-color has-text-color has-background wp-element-button"
+                        href={`${base}/meettheteam/`}
+                        style="font-style:normal;font-weight:700"
+                    >
+                        Meet the team
+                    </a>
+                </div>
+                <div class="wp-block-button is-style-outline">
+                    <a
+                        class="wp-block-button__link has-contrast-color has-text-color wp-element-button"
+                        href={`${base}/ourpartners/`}
+                        style="font-style:normal;font-weight:700"
+                    >
+                        Our partners
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </Layout>

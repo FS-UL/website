@@ -4,6 +4,7 @@ import "../styles/flip-cards.css";
 import { base, SITE_NAME, SITE_DESCRIPTION } from "../consts";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { SEO } from "astro-seo";
 import { getImage } from "astro:assets";
 import ogSource from "../assets/team-silverstone.png";
 import barlow400 from "../assets/fonts/Barlow-400.woff2?url";
@@ -65,29 +66,39 @@ const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{fullTitle}</title>
-        <meta name="description" content={description} />
+        <SEO
+            title={fullTitle}
+            description={description}
+            canonical={canonical}
+            noindex={noindex}
+            openGraph={{
+                basic: {
+                    title: fullTitle,
+                    type,
+                    image: ogImage,
+                    url: canonical,
+                },
+                image: { width: 1200, height: 630 },
+                optional: {
+                    description,
+                    locale: "en_GB",
+                    siteName: SITE_NAME,
+                },
+                article:
+                    type === "article" && publishedTime
+                        ? { publishedTime }
+                        : undefined,
+            }}
+            twitter={{
+                card: "summary_large_image",
+                title: fullTitle,
+                description,
+                image: ogImage,
+            }}
+        />
         <link rel="icon" href={`${base}/favicon.png`} />
-        <link rel="canonical" href={canonical} />
-        <link rel="sitemap" href={`${base}/sitemap.xml`} />
-        {noindex && <meta name="robots" content="noindex" />}
+        <link rel="sitemap" href={`${base}/sitemap-index.xml`} />
         <meta name="theme-color" content="#000000" />
-        <meta property="og:site_name" content={SITE_NAME} />
-        <meta property="og:locale" content="en_GB" />
-        <meta property="og:type" content={type} />
-        <meta property="og:title" content={fullTitle} />
-        <meta property="og:description" content={description} />
-        <meta property="og:url" content={canonical} />
-        <meta property="og:image" content={ogImage} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        {type === "article" && publishedTime && (
-            <meta property="article:published_time" content={publishedTime} />
-        )}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={fullTitle} />
-        <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={ogImage} />
         <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
         {[barlow400, orbitron700, orbitron900].map((href) => (
             <link

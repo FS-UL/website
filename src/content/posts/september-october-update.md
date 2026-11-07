@@ -1,6 +1,6 @@
 ---
 title: "September/October Update"
-date: 2026-11-03
+date: 2026-11-05
 author: "Mairéad Hughes"
 ---
 
