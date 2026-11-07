@@ -47,11 +47,11 @@ const path = Astro.url.pathname;
   #site-nav a:hover, #site-nav a[aria-current] { color: var(--wp--preset--color--accent-2); }
   .nav-toggle { display: none; background: none; border: 0; color: var(--wp--preset--color--contrast); cursor: pointer; padding: 4px; }
   @media (max-width: 781px) {
-    .nav-toggle { display: block; }
+    .nav-toggle { display: block; padding: 10px; margin: -6px; } /* 44px tap target, same visual position */
     #site-nav { display: none; position: absolute; top: 100%; left: calc(-1 * var(--wp--preset--spacing--50)); right: calc(-1 * var(--wp--preset--spacing--50)); background: var(--wp--preset--color--accent-3); padding: 1rem var(--wp--preset--spacing--50) 1.5rem; z-index: 20; }
     #site-nav:global(.is-open) { display: block; }
-    #site-nav ul { flex-direction: column; align-items: flex-start; gap: 1.1rem; }
-    #site-nav a { font-size: var(--wp--preset--font-size--medium); }
+    #site-nav ul { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
+    #site-nav a { display: block; padding-block: 0.6rem; font-size: var(--wp--preset--font-size--medium); }
   }
 </style>
 

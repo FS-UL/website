@@ -93,4 +93,7 @@ const highlights = await getHighlights();
         color: var(--wp--preset--color--contrast);
     }
     .hero-title span { color: var(--wp--preset--color--accent-2); }
+    @media (max-width: 781px) {
+        .hero-title { font-size: clamp(2rem, 11vw, 5rem); }
+    }
 </style>

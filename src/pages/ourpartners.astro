@@ -103,6 +103,12 @@ const contact = `${base}/sponsor/`;
         background-color: var(--wp--preset--color--accent-2);
     }
     .logos figure { margin: 0; }
+    /* Phones: stack the logos at a readable size instead of squeezing them onto one line. */
+    @media (max-width: 781px) {
+        .logos { flex-wrap: wrap; gap: 1.5rem 2rem; }
+        .logos figure { width: min(100%, 16rem); }
+        .logos img { width: 100%; }
+    }
     .logos img { vertical-align: bottom; max-width: 100%; height: auto; }
     .rule {
         color: var(--wp--preset--color--accent-2);

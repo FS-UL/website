@@ -25,6 +25,10 @@ const { title, subtitle, lede, minHeight = 166, image, position } = Astro.props;
         color: var(--wp--preset--color--contrast);
         text-align: left;
     }
+    /* Scales down with the screen so long words never split; equals 5rem at the 781px breakpoint. */
+    @media (max-width: 781px) {
+        h1 { font-size: clamp(2rem, 11vw, 5rem); }
+    }
     h2 {
         font-size: var(--wp--preset--font-size--xx-large);
         color: var(--wp--preset--color--accent-2);

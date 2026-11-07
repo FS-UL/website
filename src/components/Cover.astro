@@ -25,7 +25,7 @@ const {
 } = Astro.props;
 ---
 
-<div class:list={["cover", { "cover--inset": inset }]} style={`min-height:${minHeight}px`}>
+<div class:list={["cover", { "cover--inset": inset }]} style={`--cover-min:${minHeight}px`}>
     <Image
         src={image}
         alt=""
@@ -51,6 +51,11 @@ const {
         overflow: hidden;
         box-sizing: border-box;
         width: 100%;
+        min-height: var(--cover-min);
+    }
+    /* On phones a tall banner should not be taller than the screen. */
+    @media (max-width: 781px) {
+        .cover { min-height: min(var(--cover-min), 85svh); }
     }
     .cover--inset {
         padding-inline: var(--wp--preset--spacing--50);

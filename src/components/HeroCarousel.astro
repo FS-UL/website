@@ -118,6 +118,9 @@ const external = (href: string) => /^https?:\/\//.test(href);
         line-height: 1.1;
         color: var(--wp--preset--color--contrast);
     }
+    @media (max-width: 781px) {
+        .slide-title { font-size: clamp(1.75rem, 8vw, 4rem); }
+    }
     .slide-meta { color: var(--wp--preset--color--accent-2); }
     .slide-text { color: var(--wp--preset--color--contrast); }
 
@@ -189,6 +192,12 @@ const external = (href: string) => /^https?:\/\//.test(href);
         transition: width 0.3s ease, background-color 0.3s ease;
     }
     .carousel__dot:hover { background-color: var(--wp--preset--color--contrast); }
+    /* Touch screens: keep the dots small to look at but give each a 24px tap area. */
+    @media (pointer: coarse) {
+        .carousel__dots { gap: 0.75rem; }
+        .carousel__dot { position: relative; }
+        .carousel__dot::after { content: ""; position: absolute; inset: -6px; }
+    }
     .carousel__dot[aria-current="true"] {
         width: 28px;
         background-color: var(--wp--preset--color--accent-2);
