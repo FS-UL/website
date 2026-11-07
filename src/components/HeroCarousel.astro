@@ -1,0 +1,202 @@
+---
+// Home page hero carousel. The default slot is the first slide (the main hero);
+// `slides` are extra highlights (events, featured posts) that follow it.
+// With no extra slides it renders the hero alone, with no controls.
+import Cover from "./Cover.astro";
+import Eyebrow from "./Eyebrow.astro";
+import Button from "./Button.astro";
+import type { Slide } from "../lib/highlights";
+
+interface Props {
+    slides?: Slide[];
+}
+const { slides = [] } = Astro.props;
+const total = slides.length + 1;
+const hasMany = total > 1;
+const external = (href: string) => /^https?:\/\//.test(href);
+---
+
+<section
+    class="carousel"
+    aria-roledescription="carousel"
+    aria-label="Highlights"
+    data-carousel={hasMany ? "" : undefined}
+>
+    <div class="carousel__track">
+        <div class="carousel__slide" role="group" aria-roledescription="slide" aria-label={`1 of ${total}`}>
+            <slot />
+        </div>
+        {
+            slides.map((slide, i) => (
+                <div
+                    class="carousel__slide"
+                    role="group"
+                    aria-roledescription="slide"
+                    aria-label={`${i + 2} of ${total}`}
+                >
+                    <Cover minHeight={664} tint="accent-3" inset image={slide.image}>
+                        <Eyebrow>{slide.kind}</Eyebrow>
+                        <h2 class="slide-title">{slide.title}</h2>
+                        {slide.meta && <p class="slide-meta has-large-font-size">{slide.meta}</p>}
+                        {slide.text && <p class="slide-text">{slide.text}</p>}
+                        {slide.href && (
+                            <div>
+                                <Button href={slide.href} external={external(slide.href)}>
+                                    {slide.cta}
+                                </Button>
+                            </div>
+                        )}
+                    </Cover>
+                </div>
+            ))
+        }
+    </div>
+
+    {
+        hasMany && (
+            <div class="carousel__controls">
+                <button type="button" class="carousel__btn" data-prev aria-label="Previous slide">‹</button>
+                <div class="carousel__dots">
+                    {Array.from({ length: total }, (_, i) => (
+                        <button type="button" class="carousel__dot" data-dot={i} aria-label={`Go to slide ${i + 1}`} />
+                    ))}
+                </div>
+                <button type="button" class="carousel__btn" data-next aria-label="Next slide">›</button>
+                <button type="button" class="carousel__btn carousel__btn--play" data-toggle aria-label="Pause automatic slide show">
+                    <span data-icon>❚❚</span>
+                </button>
+            </div>
+        )
+    }
+</section>
+
+<style>
+    .carousel {
+        position: relative;
+    }
+    .carousel__track {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+    }
+    .carousel__track::-webkit-scrollbar { display: none; }
+    .carousel__slide {
+        flex: 0 0 100%;
+        min-width: 0;
+        scroll-snap-align: start;
+    }
+    /* leave room for the controls under the slide content */
+    .carousel[data-carousel] .carousel__slide :global(.cover) {
+        padding-bottom: 5rem;
+    }
+
+    .slide-title {
+        font-size: clamp(2rem, 5vw, 4rem);
+        line-height: 1.1;
+        color: var(--wp--preset--color--contrast);
+    }
+    .slide-meta { color: var(--wp--preset--color--accent-2); }
+    .slide-text { color: var(--wp--preset--color--contrast); }
+
+    .carousel__controls {
+        position: absolute;
+        inset-inline: 0;
+        bottom: 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        pointer-events: none;
+    }
+    .carousel__controls > * { pointer-events: auto; }
+    .carousel__dots { display: flex; gap: 0.6rem; }
+    .carousel__dot {
+        width: 0.8rem;
+        height: 0.8rem;
+        padding: 0;
+        border-radius: 50%;
+        border: 1px solid var(--wp--preset--color--contrast);
+        background: transparent;
+        cursor: pointer;
+    }
+    .carousel__dot[aria-current="true"] { background: var(--wp--preset--color--accent-2); border-color: var(--wp--preset--color--accent-2); }
+    .carousel__btn {
+        display: grid;
+        place-items: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        padding: 0;
+        border-radius: 50%;
+        border: 1px solid var(--wp--preset--color--contrast);
+        background: color-mix(in srgb, var(--wp--preset--color--base) 60%, transparent);
+        color: var(--wp--preset--color--contrast);
+        font-size: 1.5rem;
+        line-height: 1;
+        cursor: pointer;
+    }
+    .carousel__btn--play { font-size: 0.7rem; }
+    .carousel__btn:hover, .carousel__dot:hover { border-color: var(--wp--preset--color--accent-2); }
+    .carousel__btn:focus-visible, .carousel__dot:focus-visible { outline: 2px solid var(--wp--preset--color--accent-2); outline-offset: 2px; }
+</style>
+
+<script>
+    const AUTOPLAY_MS = 7000;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((root) => {
+        const track = root.querySelector<HTMLElement>(".carousel__track")!;
+        const slides = [...root.querySelectorAll<HTMLElement>(".carousel__slide")];
+        const dots = [...root.querySelectorAll<HTMLElement>("[data-dot]")];
+        const toggle = root.querySelector<HTMLElement>("[data-toggle]")!;
+        const icon = toggle.querySelector<HTMLElement>("[data-icon]")!;
+        let index = 0;
+        let playing = !reducedMotion.matches;
+        let paused = false; // hover / focus
+        let timer: number | undefined;
+
+        const show = (i: number) => {
+            index = (i + slides.length) % slides.length;
+            track.scrollTo({ left: slides[index].offsetLeft, behavior: reducedMotion.matches ? "auto" : "smooth" });
+        };
+
+        // Keep dots, aria-hidden and focusability in step with whichever slide is in view.
+        const setActive = (i: number) => {
+            index = i;
+            slides.forEach((s, n) => {
+                s.toggleAttribute("inert", n !== i);
+                s.setAttribute("aria-hidden", String(n !== i));
+            });
+            dots.forEach((d, n) => d.setAttribute("aria-current", String(n === i)));
+        };
+        const io = new IntersectionObserver(
+            (entries) => entries.forEach((e) => e.isIntersecting && setActive(slides.indexOf(e.target as HTMLElement))),
+            { root: track, threshold: 0.6 },
+        );
+        slides.forEach((s) => io.observe(s));
+        setActive(0);
+
+        const schedule = () => {
+            window.clearInterval(timer);
+            if (playing && !paused) timer = window.setInterval(() => show(index + 1), AUTOPLAY_MS);
+        };
+        const render = () => {
+            icon.textContent = playing ? "❚❚" : "▶";
+            toggle.setAttribute("aria-label", playing ? "Pause automatic slide show" : "Start automatic slide show");
+            // Only announce slide changes when the user is in control of them.
+            track.setAttribute("aria-live", playing ? "off" : "polite");
+            schedule();
+        };
+
+        root.querySelector("[data-prev]")!.addEventListener("click", () => { show(index - 1); });
+        root.querySelector("[data-next]")!.addEventListener("click", () => { show(index + 1); });
+        dots.forEach((d, n) => d.addEventListener("click", () => show(n)));
+        toggle.addEventListener("click", () => { playing = !playing; render(); });
+        root.addEventListener("mouseenter", () => { paused = true; schedule(); });
+        root.addEventListener("mouseleave", () => { paused = false; schedule(); });
+        root.addEventListener("focusin", () => { paused = true; schedule(); });
+        root.addEventListener("focusout", () => { paused = false; schedule(); });
+        reducedMotion.addEventListener("change", () => { playing = !reducedMotion.matches; render(); });
+        render();
+    });
+</script>

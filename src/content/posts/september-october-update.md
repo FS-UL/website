@@ -2,6 +2,7 @@
 title: "September/October Update"
 date: 2026-11-05
 author: "Mairéad Hughes"
+featured: true
 ---
 
 ![The Formula Student UL team and car in the pit lane at Silverstone](../../assets/team-silverstone.png)

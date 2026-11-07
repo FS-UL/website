@@ -10,22 +10,28 @@ import Card from "../components/Card.astro";
 import CtaCover from "../components/CtaCover.astro";
 import Buttons from "../components/Buttons.astro";
 import Button from "../components/Button.astro";
+import HeroCarousel from "../components/HeroCarousel.astro";
 import { base } from "../consts";
+import { getHighlights } from "../lib/highlights";
+
+const highlights = await getHighlights();
 ---
 
 <Layout>
-    <Cover minHeight={664} tint="accent-3" inset eager>
-        <h1 class="hero-title">
-            Built in Limerick.
-            <br />
-            Engineered to <span>Perform.</span>
-        </h1>
-        <p class="has-large-font-size">This site is still under construction 🏗️</p>
-        <Buttons>
-            <Button href={`${base}/ourcar/`} textColor="accent-1">See our car</Button>
-            <Button href={`${base}/meettheteam/`} variant="outline">Meet the team</Button>
-        </Buttons>
-    </Cover>
+    <HeroCarousel slides={highlights}>
+        <Cover minHeight={664} tint="accent-3" inset eager>
+            <h1 class="hero-title">
+                Built in Limerick.
+                <br />
+                Engineered to <span>Perform.</span>
+            </h1>
+            <p class="has-large-font-size">This site is still under construction 🏗️</p>
+            <Buttons>
+                <Button href={`${base}/ourcar/`} textColor="accent-1">See our car</Button>
+                <Button href={`${base}/meettheteam/`} variant="outline">Meet the team</Button>
+            </Buttons>
+        </Cover>
+    </HeroCarousel>
 
     <Band bg="accent-5">
         <Columns>
@@ -36,7 +42,7 @@ import { base } from "../consts";
     </Band>
 
     <Band bg="base">
-        <h1>Our Mission</h1>
+        <h2 class="section-title section-title--accent">Our Mission</h2>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at
             neque mattis, malesuada velit vel, facilisis tortor. Phasellus vel
