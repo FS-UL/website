@@ -6,7 +6,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SEO } from "astro-seo";
 import { getImage } from "astro:assets";
-import ogSource from "../assets/team-silverstone.png";
+import { photos } from "../lib/images";
 import barlow400 from "../assets/fonts/Barlow-400.woff2?url";
 import orbitron700 from "../assets/fonts/Orbitron-700.woff2?url";
 import orbitron900 from "../assets/fonts/Orbitron-900.woff2?url";
@@ -17,7 +17,7 @@ const {
     publishedTime,
     author,
     noindex = false,
-    image = ogSource,
+    image = photos.carShowcase,
     prev,
     next,
 } = Astro.props;

@@ -7,13 +7,14 @@ import Card from "../components/Card.astro";
 import Buttons from "../components/Buttons.astro";
 import Button from "../components/Button.astro";
 import { base, SPONSOR_FORM_URL } from "../consts";
+import { photos } from "../lib/images";
 ---
 
 <Layout
     title="Sponsor Enquiry"
     description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel."
 >
-    <PageHero title="Sponsor Enquiry" />
+    <PageHero title="Sponsor Enquiry" image={photos.carOnGrid} position="50% 30%" />
 
     <Band bg="base" gap="var(--wp--preset--spacing--30)">
         <h2 class="section-title section-title--accent">Lorem ipsum dolor sit amet</h2>

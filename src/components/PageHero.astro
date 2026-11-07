@@ -7,11 +7,13 @@ interface Props {
     subtitle?: string;
     lede?: string;
     minHeight?: number;
+    image?: ImageMetadata;
+    position?: string;
 }
-const { title, subtitle, lede, minHeight = 166 } = Astro.props;
+const { title, subtitle, lede, minHeight = 166, image, position } = Astro.props;
 ---
 
-<Cover {minHeight}>
+<Cover {minHeight} {image} {position}>
     <h1>{title}</h1>
     {subtitle && <h2>{subtitle}</h2>}
     {lede && <p>{lede}</p>}

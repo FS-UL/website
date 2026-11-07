@@ -13,13 +13,14 @@ import Button from "../components/Button.astro";
 import HeroCarousel from "../components/HeroCarousel.astro";
 import { base } from "../consts";
 import { getHighlights } from "../lib/highlights";
+import { photos } from "../lib/images";
 
 const highlights = await getHighlights();
 ---
 
 <Layout>
     <HeroCarousel slides={highlights}>
-        <Cover minHeight={664} tint="accent-3" inset eager>
+        <Cover minHeight={664} tint="accent-3" inset eager image={photos.teamSilverstone}>
             <h1 class="hero-title">
                 Built in Limerick.
                 <br />
@@ -71,6 +72,8 @@ const highlights = await getHighlights();
     </Band>
 
     <CtaCover
+        image={photos.carOnGrid}
+        position="50% 22%"
         title="Want to back the team?"
         text="Partner with Formula Student UL and help put the next generation of engineers on the grid."
     >

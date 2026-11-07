@@ -5,11 +5,13 @@ import Cover from "./Cover.astro";
 interface Props {
     title: string;
     text: string;
+    image?: ImageMetadata;
+    position?: string;
 }
-const { title, text } = Astro.props;
+const { title, text, image, position } = Astro.props;
 ---
 
-<Cover minHeight={360} inset>
+<Cover minHeight={360} inset {image} {position}>
     <h2>{title}</h2>
     <p>{text}</p>
     <slot />

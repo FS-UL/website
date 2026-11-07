@@ -12,6 +12,7 @@ import CtaCover from "../components/CtaCover.astro";
 import Buttons from "../components/Buttons.astro";
 import Button from "../components/Button.astro";
 import { base } from "../consts";
+import { photos } from "../lib/images";
 
 const systems = [
     ["01", "Powertrain"],
@@ -32,6 +33,8 @@ const systems = [
         subtitle="Built in Limerick"
         lede="Every part of our car is designed, built and tested by students at the University of Limerick."
         minHeight={480}
+        image={photos.carShowcase}
+        position="50% 60%"
     />
 
     <Band bg="base">
@@ -78,6 +81,8 @@ const systems = [
     </Band>
 
     <CtaCover
+        image={photos.pitlaneTeam}
+        position="50% 72%"
         title="Want to know who builds it?"
         text="Behind every lap is a team of students from the University of Limerick, supported by our partners."
     >

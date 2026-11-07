@@ -9,6 +9,7 @@ import Buttons from '../../components/Buttons.astro';
 import Button from '../../components/Button.astro';
 import NewsGrid from '../../components/NewsGrid.astro';
 import { base } from '../../consts';
+import { photos } from '../../lib/images';
 
 // 9 posts per page, newest first: /newsroom/, /newsroom/2/, ...
 export const getStaticPaths = (async ({ paginate }) => {
@@ -24,7 +25,7 @@ const origin = (u?: string) => (u ? new URL(u, Astro.site).href : undefined);
   prev={origin(page.url.prev)}
   next={origin(page.url.next)}
 >
-  <PageHero title="Newsroom" />
+  <PageHero title="Newsroom" image={photos.garageNight} position="50% 55%" />
 
   <Band bg="accent-5" pad={50} gap="var(--wp--preset--spacing--30)">
     <h2 class="section-title section-title--accent">Latest from the team</h2>
@@ -43,6 +44,8 @@ const origin = (u?: string) => (u ? new URL(u, Astro.site).href : undefined);
   </Band>
 
   <CtaCover
+    image={photos.garageMechanics}
+    position="50% 60%"
     title="Follow the build"
     text="Behind-the-scenes updates, workshop photos and race-day moments, straight from the team."
   >

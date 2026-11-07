@@ -9,6 +9,7 @@ import CtaCover from "../components/CtaCover.astro";
 import Buttons from "../components/Buttons.astro";
 import Button from "../components/Button.astro";
 import { base } from "../consts";
+import { photos } from "../lib/images";
 import img1 from "../assets/uploads/2026/09/Irish-Cement-Logo.png";
 import img2 from "../assets/uploads/2026/09/Serosep-edited.png";
 import img3 from "../assets/uploads/2026/09/Onsemi_logo_2021.svg_.webp";
@@ -25,7 +26,7 @@ const contact = `${base}/sponsor/`;
     title="Our Partners"
     description="Formula Student UL wouldn't be on the track without the support of our partners. Their expertise, resources and belief in our team let us design, build and race a car of our own."
 >
-    <PageHero title="Our Partners" />
+    <PageHero title="Our Partners" image={photos.garageMechanics} position="50% 55%" />
 
     <Band bg="base" pad={50} gap="var(--wp--preset--spacing--30)">
         <h2 class="section-title section-title--accent">Backed by industry leaders</h2>
@@ -79,6 +80,8 @@ const contact = `${base}/sponsor/`;
     </Band>
 
     <CtaCover
+        image={photos.carOnGrid}
+        position="50% 90%"
         title="Ready to join the grid?"
         text="Talk to us about how your company can back the next generation of engineers."
     >
