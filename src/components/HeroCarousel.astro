@@ -205,7 +205,7 @@ const external = (href: string) => /^https?:\/\//.test(href);
 </style>
 
 <script>
-    const AUTOPLAY_MS = 7000;
+    const AUTOPLAY_MS = 5000;
     const SWIPE_PX = 50;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -218,12 +218,12 @@ const external = (href: string) => /^https?:\/\//.test(href);
         const playIcon = toggle.querySelector<SVGElement>("[data-play]")!;
         let index = 0;
         let playing = !reducedMotion.matches;
-        let hovering = false;
+        let held = false; // keyboard focus is inside the carousel
         let timer: number | undefined;
 
         const schedule = () => {
             window.clearInterval(timer);
-            if (playing && !hovering) timer = window.setInterval(() => show(index + 1), AUTOPLAY_MS);
+            if (playing && !held) timer = window.setInterval(() => show(index + 1), AUTOPLAY_MS);
         };
 
         // Slides are hidden with visibility, so inactive ones are out of the tab order and away from screen readers.
@@ -248,11 +248,12 @@ const external = (href: string) => /^https?:\/\//.test(href);
         dots.forEach((d, n) => d.addEventListener("click", () => show(n)));
         toggle.addEventListener("click", () => { playing = !playing; render(); });
 
-        // Pause while the pointer or keyboard focus is inside the carousel.
-        root.addEventListener("mouseenter", () => { hovering = true; schedule(); });
-        root.addEventListener("mouseleave", () => { hovering = false; schedule(); });
-        root.addEventListener("focusin", () => { hovering = true; schedule(); });
-        root.addEventListener("focusout", () => { hovering = false; schedule(); });
+        // Pause while keyboard focus is inside the carousel so it doesn't move under someone tabbing through it.
+        // Mouse hover and mouse clicks deliberately do not pause it: the pause button is the control for that.
+        root.addEventListener("focusin", (e) => {
+            if ((e.target as HTMLElement).matches(":focus-visible")) { held = true; schedule(); }
+        });
+        root.addEventListener("focusout", () => { held = false; schedule(); });
 
         // Swipe on touch screens.
         let startX = 0;
