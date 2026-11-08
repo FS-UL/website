@@ -13,15 +13,55 @@ import img6 from "../assets/uploads/2026/10/DSC01436-Background-Removed-scaled-e
 import img7 from "../assets/uploads/2026/10/DSC01434-Background-Removed-scaled-e1791317289135-918x1024.png";
 
 const team = [
-    { name: "Daire", role: "Team Manager", photo: img0, bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor." },
-    { name: "Elio", role: "Electrical Team Lead", photo: img1, bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor." },
-    { name: "Cormac", role: "Dynamics Team Lead", photo: img2, bio: "Vehicle Dynamics decides what car to build, so the rest of the team can focus on the parts. Went from a one-person subteam to leading eight, uses maths and physics to set suspension geometry, brake targets and calculate component loads. First-class Aeronautical Engineering graduate, with a semester at Georgia Tech and an engineering placement in Germany. Now a PhD student learning governing equations from data." },
-    { name: "Daniel", role: "Aero Team Lead", photo: img3, bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor." },
-    { name: "Elio", role: "Electrical Team Lead", photo: img4, bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor." },
-    { name: "Elio", role: "Electrical Team Lead", photo: img5, bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor." },
-    { name: "JJ", role: "Electrical Team Lead", photo: img6, bio: "I’m a fifth-year MSc Mechanical Engineering student, and this is my second year on the team. Most of my days are spent working towards a competitive Formula Student car to bring to Silverstone in July!" },
-    { name: "Elio", role: "Electrical Team Lead", photo: img7, bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor." },
-]
+    {
+        name: "Daire",
+        role: "Team Manager",
+        photo: img0,
+        bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor.",
+    },
+    {
+        name: "Elio",
+        role: "Electrical Team Lead",
+        photo: img1,
+        bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor.",
+    },
+    {
+        name: "Cormac",
+        role: "Vehcile Dynamics Team Lead",
+        photo: img2,
+        bio: "Decides what car to build. Grew Vehicle Dynamics from one person to eight, setting suspension geometry, brake targets and component loads. First-class Aero Engineering graduate, now a PhD student developing methods to learn governing equations from data.",
+    },
+    {
+        name: "Daniel",
+        role: "Aero Team Lead",
+        photo: img3,
+        bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor.",
+    },
+    {
+        name: "David",
+        role: "Powertrain Team Lead",
+        photo: img4,
+        bio: "I'm a fourth year Aeronautical Engineering student and this is my second year on the team. I worked on suspension last year and have moved over to Powertrain for this year. In my spare time I enjoy rock climbing.",
+    },
+    {
+        name: "Elio",
+        role: "Electrical Team Lead",
+        photo: img5,
+        bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor.",
+    },
+    {
+        name: "JJ",
+        role: "Electrical Team Lead",
+        photo: img6,
+        bio: "I’m a fifth-year MSc Mechanical Engineering student, and this is my second year on the team. Most of my days are spent working towards a competitive Formula Student car to bring to Silverstone in July!",
+    },
+    {
+        name: "Elio",
+        role: "Electrical Team Lead",
+        photo: img7,
+        bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at neque mattis, malesuada velit vel, facilisis tortor.",
+    },
+];
 ---
 
 <Layout
@@ -32,7 +72,11 @@ const team = [
         <h1>Meet our Team</h1>
         <CardGrid min={14}>
             {team.map((member) => (
-                <TeamCard name={member.name} role={member.role} photo={member.photo}>
+                <TeamCard
+                    name={member.name}
+                    role={member.role}
+                    photo={member.photo}
+                >
                     {member.bio}
                 </TeamCard>
             ))}
@@ -47,6 +91,8 @@ const team = [
         text-align: left;
     }
     @media (max-width: 781px) {
-        h1 { font-size: clamp(2rem, 11vw, 5rem); }
+        h1 {
+            font-size: clamp(2rem, 11vw, 5rem);
+        }
     }
 </style>
