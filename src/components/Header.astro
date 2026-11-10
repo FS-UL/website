@@ -67,6 +67,13 @@ const path = Astro.url.pathname;
     if (!open) header.classList.remove('is-hidden');
   });
 
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+      toggle.click();
+      toggle.focus();
+    }
+  });
+
   // Hide on scroll down, show on scroll up. The 6px threshold ignores jitter and trackpad bounce.
   let lastY = window.scrollY;
   function update() {

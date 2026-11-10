@@ -54,18 +54,31 @@ const {
     import "@google/model-viewer";
 
     document.querySelectorAll<HTMLElement>(".model").forEach((root) => {
-        const viewer = root.querySelector("model-viewer") as HTMLElement & { src: string };
+        const viewer = root.querySelector("model-viewer") as HTMLElement & { src: string | null };
         const poster = root.querySelector<HTMLButtonElement>(".model__poster")!;
         const label = poster.querySelector<HTMLElement>(".model__load")!;
+        let refocus = false;
+        // True when focus is still where the click left it (the browser may not have moved it off the button yet).
+        const focusUnmoved = () => document.activeElement === document.body || document.activeElement === poster;
         poster.addEventListener("click", () => {
             if (poster.disabled) return;
+            refocus = document.activeElement === poster; // disabling the button drops its focus
             poster.disabled = true;
             label.textContent = "Loading…";
             viewer.src = viewer.dataset.src!;
         });
-        viewer.addEventListener("load", () => { poster.hidden = true; });
+        viewer.addEventListener("load", () => {
+            const handOver = refocus && focusUnmoved();
+            poster.hidden = true;
+            // Hand keyboard focus to the viewer (its focusable part is the interaction layer in its
+            // shadow root), unless the visitor has moved on to something else while it loaded.
+            // Wait a frame: the layer only becomes focusable once the model is on screen.
+            if (handOver) requestAnimationFrame(() => viewer.shadowRoot?.querySelector<HTMLElement>(".userInput")?.focus());
+        });
         viewer.addEventListener("error", () => {
+            if (!poster.hidden) viewer.src = null; // so the next click starts a fresh download
             poster.disabled = false;
+            if (refocus && focusUnmoved()) poster.focus();
             label.textContent = "Couldn't load the model. Try again";
         });
     });

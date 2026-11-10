@@ -1,7 +1,7 @@
 ---
 import "../styles/global.css";
 import "../styles/flip-cards.css";
-import { base, SITE_NAME, SITE_DESCRIPTION } from "../consts";
+import { base, SITE_NAME, SITE_DESCRIPTION, INSTAGRAM_URL } from "../consts";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SEO } from "astro-seo";
@@ -10,6 +10,22 @@ import { photos } from "../lib/images";
 import barlow400 from "../assets/fonts/Barlow-400.woff2?url";
 import orbitron700 from "../assets/fonts/Orbitron-700.woff2?url";
 import orbitron900 from "../assets/fonts/Orbitron-900.woff2?url";
+interface Props {
+    /** Page title; the site name is appended. Leave out on the home page. */
+    title?: string;
+    description?: string;
+    type?: "website" | "article";
+    /** ISO date, for articles. */
+    publishedTime?: string;
+    author?: string;
+    noindex?: boolean;
+    /** Social preview image (cropped to 1200x630). */
+    image?: ImageMetadata;
+    imageAlt?: string;
+    /** Absolute URLs of the previous/next page in a paginated list. */
+    prev?: string;
+    next?: string;
+}
 const {
     title,
     description = SITE_DESCRIPTION,
@@ -34,6 +50,7 @@ const og = await getImage({
 const ogImage = new URL(og.src, Astro.site).href;
 const homeUrl = new URL(`${base}/`, Astro.site).href;
 const isHome = canonical === homeUrl;
+const orgId = `${homeUrl}#org`;
 const crumbs = isHome || noindex
     ? []
     : [
@@ -48,22 +65,22 @@ const jsonLd = {
     "@graph": [
         {
             "@type": "Organization",
-            "@id": new URL("/#org", Astro.site).href,
+            "@id": orgId,
             name: SITE_NAME,
-            url: new URL("/", Astro.site).href,
+            url: homeUrl,
             logo: new URL(`${base}/favicon.png`, Astro.site).href,
             description: SITE_DESCRIPTION,
             parentOrganization: { "@type": "CollegeOrUniversity", name: "University of Limerick" },
-            sameAs: ["https://www.instagram.com/formulastudentul/"],
+            sameAs: [INSTAGRAM_URL],
         },
         {
             "@type": "WebSite",
-            "@id": new URL("/#website", Astro.site).href,
+            "@id": `${homeUrl}#website`,
             name: SITE_NAME,
             url: homeUrl,
             description: SITE_DESCRIPTION,
             inLanguage: "en-GB",
-            publisher: { "@id": new URL("/#org", Astro.site).href },
+            publisher: { "@id": orgId },
         },
         ...(crumbs.length
             ? [
@@ -89,7 +106,7 @@ const jsonLd = {
                       author: author
                           ? { "@type": "Person", name: author }
                           : undefined,
-                      publisher: { "@id": new URL("/#org", Astro.site).href },
+                      publisher: { "@id": orgId },
                       mainEntityOfPage: canonical,
                   },
               ]
@@ -146,7 +163,7 @@ const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
         {next && <link rel="next" href={next} />}
         <link rel="sitemap" href={`${base}/sitemap-index.xml`} />
         <meta name="theme-color" content="#292929" />
-        <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+        <script type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, "\\u003c")} />
         {[barlow400, orbitron700, orbitron900].map((href) => (
             <link
                 rel="preload"

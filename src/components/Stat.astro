@@ -10,21 +10,29 @@ const { value, label, big = false } = Astro.props;
 ---
 
 <div class:list={["stat", { "stat--big": big }]}>
-    <h3>{value}</h3>
-    <p>{label}</p>
+    <p class="stat__value">{value}</p>
+    <p class="stat__label">{label}</p>
 </div>
 
 <style>
     .stat { flex: 1 1 0; min-width: 0; overflow-wrap: break-word; }
     .stat > * + * { margin-block-start: var(--block-gap); }
-    h3 { color: var(--wp--preset--color--accent-2); }
-    p {
+    /* Looks like a heading, but a bare number is not one. */
+    .stat__value {
+        font-family: var(--wp--preset--font-family--orbitron);
+        font-size: var(--wp--preset--font-size--large);
+        font-weight: 700;
+        letter-spacing: 2px;
+        line-height: 1.23;
+        color: var(--wp--preset--color--accent-2);
+    }
+    .stat__label {
         font-family: var(--wp--preset--font-family--orbitron);
         font-size: var(--wp--preset--font-size--small);
         letter-spacing: 2px;
         text-transform: uppercase;
         color: var(--wp--preset--color--contrast);
     }
-    .stat--big h3 { font-size: clamp(2.25rem, 5vw, 4.5rem); line-height: 1; }
-    .stat--big p { font-size: var(--wp--preset--font-size--medium); }
+    .stat--big .stat__value { font-size: clamp(2.25rem, 5vw, 4.5rem); line-height: 1; }
+    .stat--big .stat__label { font-size: var(--wp--preset--font-size--medium); }
 </style>

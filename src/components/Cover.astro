@@ -23,6 +23,9 @@ const {
     image = photos.carShowcase,
     position = "50% 60%",
 } = Astro.props;
+// Smaller copies for phones and tablets; the browser picks one from srcset.
+const maxWidth = Math.min(1920, image.width);
+const widths = [...[640, 960, 1280].filter((w) => w < maxWidth), maxWidth];
 ---
 
 <div class:list={["cover", { "cover--inset": inset }]} style={`--cover-min:${minHeight}px`}>
@@ -30,11 +33,14 @@ const {
         src={image}
         alt=""
         class="cover__image"
-        width={Math.min(1920, image.width)}
+        width={maxWidth}
+        widths={widths}
+        sizes="100vw"
         style={`object-position:${position}`}
         format="webp"
         quality={80}
         loading={eager ? "eager" : "lazy"}
+        fetchpriority={eager ? "high" : undefined}
     />
     <span class:list={["cover__tint", `cover__tint--${tint}`]} aria-hidden="true"></span>
     <div class="cover__inner"><slot /></div>

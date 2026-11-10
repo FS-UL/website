@@ -15,9 +15,9 @@ import img2 from "../assets/uploads/2026/09/Serosep-edited.png";
 import img3 from "../assets/uploads/2026/09/Onsemi_logo_2021.svg_.webp";
 
 const logos = [
-    { src: img1, width: 763 },
-    { src: img2, width: 1000 },
-    { src: img3, width: 1000 },
+    { src: img1, width: 763, alt: "Irish Cement" },
+    { src: img2, width: 1000, alt: "Serosep" },
+    { src: img3, width: 1000, alt: "onsemi" },
 ];
 const contact = `${base}/sponsor/`;
 ---
@@ -39,9 +39,9 @@ const contact = `${base}/sponsor/`;
 
     <div class="logos">
         {
-            logos.map(({ src, width }) => (
+            logos.map(({ src, width, alt }) => (
                 <figure>
-                    <Image src={src} alt="" {width} format="webp" quality={80} />
+                    <Image src={src} {alt} {width} format="webp" quality={80} />
                 </figure>
             ))
         }

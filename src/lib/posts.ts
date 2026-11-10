@@ -10,6 +10,8 @@ export function postExcerpt(entry: CollectionEntry<'posts'>) {
   if (entry.data.excerpt) return entry.data.excerpt;
   const words = (entry.body ?? '')
     .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1') // links: keep the text
+    .replace(/<[^>]+>/g, '')
     .replace(/^#+\s*/gm, '')
     .replace(/[*_`]/g, '')
     .replace(/\s+/g, ' ')

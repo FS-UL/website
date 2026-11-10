@@ -8,7 +8,7 @@ import CtaCover from '../../components/CtaCover.astro';
 import Buttons from '../../components/Buttons.astro';
 import Button from '../../components/Button.astro';
 import NewsGrid from '../../components/NewsGrid.astro';
-import { base } from '../../consts';
+import { base, INSTAGRAM_URL } from '../../consts';
 import { photos } from '../../lib/images';
 
 // 9 posts per page, newest first: /newsroom/, /newsroom/2/, ...
@@ -50,7 +50,7 @@ const origin = (u?: string) => (u ? new URL(u, Astro.site).href : undefined);
     text="Behind-the-scenes updates, workshop photos and race-day moments, straight from the team."
   >
     <Buttons>
-      <Button href="https://www.instagram.com/formulastudentul/">Follow on Instagram</Button>
+      <Button href={INSTAGRAM_URL} external>Follow on Instagram</Button>
       <Button href={`${base}/ourpartners/`} variant="outline">Back the team</Button>
     </Buttons>
   </CtaCover>

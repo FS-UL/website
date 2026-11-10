@@ -257,10 +257,16 @@ const external = (href: string) => /^https?:\/\//.test(href);
 
         // Swipe on touch screens.
         let startX = 0;
-        track.addEventListener("touchstart", (e) => { startX = e.touches[0].clientX; }, { passive: true });
+        let startY = 0;
+        track.addEventListener("touchstart", (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        }, { passive: true });
         track.addEventListener("touchend", (e) => {
             const dx = e.changedTouches[0].clientX - startX;
-            if (Math.abs(dx) > SWIPE_PX) show(index + (dx < 0 ? 1 : -1));
+            const dy = e.changedTouches[0].clientY - startY;
+            // Mostly-vertical movement is the page scrolling, not a swipe.
+            if (Math.abs(dx) > SWIPE_PX && Math.abs(dx) > Math.abs(dy)) show(index + (dx < 0 ? 1 : -1));
         }, { passive: true });
 
         reducedMotion.addEventListener("change", () => { playing = !reducedMotion.matches; render(); });
