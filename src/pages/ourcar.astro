@@ -7,6 +7,7 @@ import Stat from "../components/Stat.astro";
 import CardGrid from "../components/CardGrid.astro";
 import Card from "../components/Card.astro";
 import Eyebrow from "../components/Eyebrow.astro";
+import ModelViewer from "../components/ModelViewer.astro";
 import Step from "../components/Step.astro";
 import CtaCover from "../components/CtaCover.astro";
 import Buttons from "../components/Buttons.astro";
@@ -44,6 +45,12 @@ const systems = [
             <Stat value="000" label="Weight (kg)" />
             <Stat value="0.0s" label="0 to 100 km/h" />
         </Columns>
+    </Band>
+
+    <Band bg="accent-5">
+        <Eyebrow>Explore it</Eyebrow>
+        <h2 class="section-title">See it from every angle</h2>
+        <ModelViewer />
     </Band>
 
     <Band bg="accent-3">
