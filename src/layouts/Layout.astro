@@ -18,6 +18,7 @@ const {
     author,
     noindex = false,
     image = photos.carShowcase,
+    imageAlt = `${SITE_NAME} team and car`,
     prev,
     next,
 } = Astro.props;
@@ -31,6 +32,17 @@ const og = await getImage({
     quality: 80,
 });
 const ogImage = new URL(og.src, Astro.site).href;
+const homeUrl = new URL(`${base}/`, Astro.site).href;
+const isHome = canonical === homeUrl;
+const crumbs = isHome || noindex
+    ? []
+    : [
+          { name: SITE_NAME, url: homeUrl },
+          ...(type === "article"
+              ? [{ name: "Newsroom", url: new URL(`${base}/newsroom/`, Astro.site).href }]
+              : []),
+          { name: title, url: canonical },
+      ];
 const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -41,8 +53,31 @@ const jsonLd = {
             url: new URL("/", Astro.site).href,
             logo: new URL(`${base}/favicon.png`, Astro.site).href,
             description: SITE_DESCRIPTION,
+            parentOrganization: { "@type": "CollegeOrUniversity", name: "University of Limerick" },
             sameAs: ["https://www.instagram.com/formulastudentul/"],
         },
+        {
+            "@type": "WebSite",
+            "@id": new URL("/#website", Astro.site).href,
+            name: SITE_NAME,
+            url: homeUrl,
+            description: SITE_DESCRIPTION,
+            inLanguage: "en-GB",
+            publisher: { "@id": new URL("/#org", Astro.site).href },
+        },
+        ...(crumbs.length
+            ? [
+                  {
+                      "@type": "BreadcrumbList",
+                      itemListElement: crumbs.map((c, i) => ({
+                          "@type": "ListItem",
+                          position: i + 1,
+                          name: c.name,
+                          item: c.url,
+                      })),
+                  },
+              ]
+            : []),
         ...(type === "article"
             ? [
                   {
@@ -81,7 +116,7 @@ const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
                     image: ogImage,
                     url: canonical,
                 },
-                image: { width: 1200, height: 630 },
+                image: { width: 1200, height: 630, alt: imageAlt },
                 optional: {
                     description,
                     locale: "en_GB",
@@ -97,6 +132,7 @@ const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
                 title: fullTitle,
                 description,
                 image: ogImage,
+                imageAlt,
             }}
         />
         <link rel="icon" type="image/png" href={`${base}/favicon.png`} />
@@ -109,7 +145,7 @@ const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
         {prev && <link rel="prev" href={prev} />}
         {next && <link rel="next" href={next} />}
         <link rel="sitemap" href={`${base}/sitemap-index.xml`} />
-        <meta name="theme-color" content="#000000" />
+        <meta name="theme-color" content="#292929" />
         <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
         {[barlow400, orbitron700, orbitron900].map((href) => (
             <link

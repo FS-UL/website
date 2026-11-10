@@ -18,7 +18,7 @@ import { photos } from "../lib/images";
 const highlights = await getHighlights();
 ---
 
-<Layout>
+<Layout image={photos.teamSilverstone}>
     <HeroCarousel slides={highlights}>
         <Cover minHeight={664} tint="accent-3" inset eager image={photos.teamSilverstone}>
             <h1 class="hero-title">
